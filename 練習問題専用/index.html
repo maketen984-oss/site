@@ -2,9 +2,9 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="Shift_JIS">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ŠwKŒv‰æì¬ƒ[ƒJ[</title>
+    <title>å­¦ç¿’è¨ˆç”»ä½œæˆãƒ¡ãƒ¼ã‚«ãƒ¼</title>
     <link rel="stylesheet" href="style.css">
     <script>
 window.MathJax = {
@@ -26,50 +26,50 @@ window.MathJax = {
 
 <body>
 	<div id="game-transition"></div>
-	<!-- Šw”N‘I‘ð‰æ–Ê -->
+	<!-- å­¦å¹´é¸æŠžç”»é¢ -->
 <div id="grade-select-page" class="login-page">
     <div class="login-card">
-        <h1>ŠwKŒv‰æì¬ƒ[ƒJ[</h1>
-        <p>Šw”N‚ð‘I‚ñ‚Å‚­‚¾‚³‚¢</p>
+        <h1>å­¦ç¿’è¨ˆç”»ä½œæˆãƒ¡ãƒ¼ã‚«ãƒ¼</h1>
+        <p>å­¦å¹´ã‚’é¸ã‚“ã§ãã ã•ã„</p>
 
         <div class="login-form">
             <button type="button" onclick="selectGrade('1')">
-                1”N¶
+                1å¹´ç”Ÿ
             </button>
 
             <button type="button" onclick="selectGrade('2')">
-                2”N¶
+                2å¹´ç”Ÿ
             </button>
 
             <button type="button" onclick="selectGrade('3')">
-                3”N¶
+                3å¹´ç”Ÿ
             </button>
         </div>
     </div>
 </div>
-	<!-- ƒƒOƒCƒ“‰æ–Ê -->
+	<!-- ãƒ­ã‚°ã‚¤ãƒ³ç”»é¢ -->
 <div id="login-page" class="login-page" style="display: none;">
     <div class="login-card">
-        <h1>ŠwKŒv‰æì¬ƒ[ƒJ[</h1>
-        <p>ƒƒOƒCƒ“‚µ‚ÄŠwKŒv‰æ‚ðŠÇ—‚µ‚æ‚¤I</p>
+        <h1>å­¦ç¿’è¨ˆç”»ä½œæˆãƒ¡ãƒ¼ã‚«ãƒ¼</h1>
+        <p>ãƒ­ã‚°ã‚¤ãƒ³ã—ã¦å­¦ç¿’è¨ˆç”»ã‚’ç®¡ç†ã—ã‚ˆã†ï¼</p>
 
         <div class="login-form">
-            <label for="login-id">ƒ†[ƒU[ID</label>
+            <label for="login-id">ãƒ¦ãƒ¼ã‚¶ãƒ¼ID</label>
             <input
                 type="text"
                 id="login-id"
-                placeholder="ƒ†[ƒU[ID‚ð“ü—Í"
+                placeholder="ãƒ¦ãƒ¼ã‚¶ãƒ¼IDã‚’å…¥åŠ›"
             >
 
-            <label for="login-password">ƒpƒXƒ[ƒh</label>
+            <label for="login-password">ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰</label>
             <input
                 type="password"
                 id="login-password"
-                placeholder="ƒpƒXƒ[ƒh‚ð“ü—Í"
+                placeholder="ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ã‚’å…¥åŠ›"
             >
 
             <button type="button" onclick="login()">
-                ƒƒOƒCƒ“
+                ãƒ­ã‚°ã‚¤ãƒ³
             </button>
 
             <p id="login-error" class="login-error"></p>
@@ -77,46 +77,46 @@ window.MathJax = {
 
         <div class="login-links">
             <button type="button" onclick="showRegister()">
-                V‹K“o˜^
+                æ–°è¦ç™»éŒ²
             </button>
 
             <button type="button" onclick="showResetPassword()">
-                ƒpƒXƒ[ƒh‚ð–Y‚ê‚½•û
+                ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ã‚’å¿˜ã‚ŒãŸæ–¹
             </button>
         </div>
     </div>
 </div>
 
-<!-- V‹K“o˜^‰æ–Ê -->
+<!-- æ–°è¦ç™»éŒ²ç”»é¢ -->
 <div id="register-page" class="login-page" style="display: none;">
     <div class="login-card">
-        <h1>V‹K“o˜^</h1>
-        <p>ƒAƒJƒEƒ“ƒg‚ðì¬‚µ‚æ‚¤I</p>
+        <h1>æ–°è¦ç™»éŒ²</h1>
+        <p>ã‚¢ã‚«ã‚¦ãƒ³ãƒˆã‚’ä½œæˆã—ã‚ˆã†ï¼</p>
 
         <div class="login-form">
-            <label for="register-name">–¼‘O</label>
+            <label for="register-name">åå‰</label>
             <input
                 type="text"
                 id="register-name"
-                placeholder="–¼‘O‚ð“ü—Í"
+                placeholder="åå‰ã‚’å…¥åŠ›"
             >
 
-            <label for="register-id">ƒ†[ƒU[ID</label>
+            <label for="register-id">ãƒ¦ãƒ¼ã‚¶ãƒ¼ID</label>
             <input
                 type="text"
                 id="register-id"
-                placeholder="ƒ†[ƒU[ID‚ð“ü—Í"
+                placeholder="ãƒ¦ãƒ¼ã‚¶ãƒ¼IDã‚’å…¥åŠ›"
             >
 
-            <label for="register-password">ƒpƒXƒ[ƒh</label>
+            <label for="register-password">ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰</label>
             <input
                 type="password"
                 id="register-password"
-                placeholder="ƒpƒXƒ[ƒh‚ð“ü—Í"
+                placeholder="ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ã‚’å…¥åŠ›"
             >
 
             <button type="button" onclick="registerUser()">
-                V‹K“o˜^
+                æ–°è¦ç™»éŒ²
             </button>
 
             <p id="register-error" class="login-error"></p>
@@ -124,35 +124,35 @@ window.MathJax = {
 
         <div class="login-links">
             <button type="button" onclick="showLogin()">
-                ƒƒOƒCƒ“‰æ–Ê‚É–ß‚é
+                ãƒ­ã‚°ã‚¤ãƒ³ç”»é¢ã«æˆ»ã‚‹
             </button>
         </div>
     </div>
 </div>
 
-<!-- ƒpƒXƒ[ƒh•ÏX‰æ–Ê -->
+<!-- ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰å¤‰æ›´ç”»é¢ -->
 <div id="reset-page" class="login-page" style="display: none;">
     <div class="login-card">
-        <h1>ƒpƒXƒ[ƒh•ÏX</h1>
-        <p>ƒ†[ƒU[ID‚ÆV‚µ‚¢ƒpƒXƒ[ƒh‚ð“ü—Í‚µ‚Ä‚ËB</p>
+        <h1>ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰å¤‰æ›´</h1>
+        <p>ãƒ¦ãƒ¼ã‚¶ãƒ¼IDã¨æ–°ã—ã„ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ã‚’å…¥åŠ›ã—ã¦ã­ã€‚</p>
 
         <div class="login-form">
-            <label for="reset-id">ƒ†[ƒU[ID</label>
+            <label for="reset-id">ãƒ¦ãƒ¼ã‚¶ãƒ¼ID</label>
             <input
                 type="text"
                 id="reset-id"
-                placeholder="ƒ†[ƒU[ID‚ð“ü—Í"
+                placeholder="ãƒ¦ãƒ¼ã‚¶ãƒ¼IDã‚’å…¥åŠ›"
             >
 
-            <label for="reset-password">V‚µ‚¢ƒpƒXƒ[ƒh</label>
+            <label for="reset-password">æ–°ã—ã„ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰</label>
             <input
                 type="password"
                 id="reset-password"
-                placeholder="V‚µ‚¢ƒpƒXƒ[ƒh‚ð“ü—Í"
+                placeholder="æ–°ã—ã„ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ã‚’å…¥åŠ›"
             >
 
             <button type="button" onclick="resetPassword()">
-                ƒpƒXƒ[ƒh‚ð•ÏX‚·‚é
+                ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ã‚’å¤‰æ›´ã™ã‚‹
             </button>
 
             <p id="reset-error" class="login-error"></p>
@@ -160,7 +160,7 @@ window.MathJax = {
 
         <div class="login-links">
             <button type="button" onclick="showLogin()">
-                ƒƒOƒCƒ“‰æ–Ê‚É–ß‚é
+                ãƒ­ã‚°ã‚¤ãƒ³ç”»é¢ã«æˆ»ã‚‹
             </button>
         </div>
     </div>
@@ -170,55 +170,55 @@ window.MathJax = {
 	<div class="account-area">
     <div id="login-status" class="login-status"></div>
     <button type="button" class="logout-btn" onclick="logout()">
-    ƒƒOƒAƒEƒg
+    ãƒ­ã‚°ã‚¢ã‚¦ãƒˆ
 	</button>
 	</div>
 
     <div class="container">
 
-    <h1 class="main-title">ŠwKŒv‰æì¬ƒ[ƒJ[</h1>
+    <h1 class="main-title">å­¦ç¿’è¨ˆç”»ä½œæˆãƒ¡ãƒ¼ã‚«ãƒ¼</h1>
 
     <header class="hero-section" id="hero">
-        <h2>Å“K‚ÈŠwKŒv‰æ‚ðì‚ë‚¤</h2>
-        <p>ŠwKƒXƒPƒWƒ…[ƒ‹‚ðŽ©“®¶¬‚µ‚Ü‚·B</p>
+        <h2>æœ€é©ãªå­¦ç¿’è¨ˆç”»ã‚’ä½œã‚ã†</h2>
+        <p>å­¦ç¿’ã‚¹ã‚±ã‚¸ãƒ¥ãƒ¼ãƒ«ã‚’è‡ªå‹•ç”Ÿæˆã—ã¾ã™ã€‚</p>
     </header>
 
     <nav class="nav-menu">
-        <a href="#hero" class="nav-btn active">ƒgƒbƒv</a>
-        <a href="#guide-toggle" class="nav-btn" onclick="openGuide(); return false;">Žg‚¢•û</a>
-        <a href="#form-section" class="nav-btn" onclick="openSettings(); return false;">Ý’è“ü—Í</a>
-        <a href="#result-layout" class="nav-btn">ŠwKŒv‰æEƒ`ƒFƒbƒJ[</a>
-        <a href="../—ûK–â‘èê—p/index(rensyu).html" class="nav-btn">—ûK–â‘è</a>
-        <a href="#mypage" class="nav-btn" onclick="showMyPage(); return false;">ƒ}ƒCƒy[ƒW</a>
+        <a href="#hero" class="nav-btn active">ãƒˆãƒƒãƒ—</a>
+        <a href="#guide-toggle" class="nav-btn" onclick="openGuide(); return false;">ä½¿ã„æ–¹</a>
+        <a href="#form-section" class="nav-btn" onclick="openSettings(); return false;">è¨­å®šå…¥åŠ›</a>
+        <a href="#result-layout" class="nav-btn">å­¦ç¿’è¨ˆç”»ãƒ»ãƒã‚§ãƒƒã‚«ãƒ¼</a>
+        <a href="../ç·´ç¿’å•é¡Œå°‚ç”¨/index(rensyu).html" class="nav-btn">ç·´ç¿’å•é¡Œ</a>
+        <a href="#mypage" class="nav-btn" onclick="showMyPage(); return false;">ãƒžã‚¤ãƒšãƒ¼ã‚¸</a>
 <button type="button" id="game-mode-nav-btn" class="nav-btn"
-        onclick="goToGameMode()">ƒQ[ƒ€ƒ‚[ƒh‚Ö</button>
+        onclick="goToGameMode()">ã‚²ãƒ¼ãƒ ãƒ¢ãƒ¼ãƒ‰ã¸</button>
 
       
     </nav>
 
-    <button class="guide-toggle-btn" id="guide-toggle" onclick="toggleGuide()"> Žg‚¢•ûE‘€ìà–¾‚ðŒ©‚é</button>
+    <button class="guide-toggle-btn" id="guide-toggle" onclick="toggleGuide()"> ä½¿ã„æ–¹ãƒ»æ“ä½œèª¬æ˜Žã‚’è¦‹ã‚‹</button>
     <div class="guide-box" id="guide-box" style="display: none;">
-        <h3> ‚±‚ÌƒAƒvƒŠ‚ÌŽg‚¢•û</h3>
+        <h3> ã“ã®ã‚¢ãƒ—ãƒªã®ä½¿ã„æ–¹</h3>
         <ul>
-            <li><strong>ƒXƒeƒbƒv1F</strong>ƒ‚[ƒh‚ð‘I‘ð‚·‚é</li>
-            <li><strong>ƒXƒeƒbƒv2F</strong>uƒeƒXƒg“úvu‹³‰Èvu•×‹­ŽžŠÔv‚ð“ü—Í</li>
-            <li><strong>ƒXƒeƒbƒv3F</strong>•×‹­‚µ‚È‚¢“ú‚ðƒJƒŒƒ“ƒ_[‚Åi‚¨‹x‚Ýj‚É‚·‚é</li>
-            <li><strong>ƒXƒeƒbƒv4F</strong>uŒv‰æ•\‚ðŽ©“®¶¬‚·‚év‚ð‰Ÿ‚·</li>
+            <li><strong>ã‚¹ãƒ†ãƒƒãƒ—1ï¼š</strong>ãƒ¢ãƒ¼ãƒ‰ã‚’é¸æŠžã™ã‚‹</li>
+            <li><strong>ã‚¹ãƒ†ãƒƒãƒ—2ï¼š</strong>ã€Œãƒ†ã‚¹ãƒˆæ—¥ã€ã€Œæ•™ç§‘ã€ã€Œå‹‰å¼·æ™‚é–“ã€ã‚’å…¥åŠ›</li>
+            <li><strong>ã‚¹ãƒ†ãƒƒãƒ—3ï¼š</strong>å‹‰å¼·ã—ãªã„æ—¥ã‚’ã‚«ãƒ¬ãƒ³ãƒ€ãƒ¼ã§ï¼ˆãŠä¼‘ã¿ï¼‰ã«ã™ã‚‹</li>
+            <li><strong>ã‚¹ãƒ†ãƒƒãƒ—4ï¼š</strong>ã€Œè¨ˆç”»è¡¨ã‚’è‡ªå‹•ç”Ÿæˆã™ã‚‹ã€ã‚’æŠ¼ã™</li>
         </ul>
     </div>
     
-<button class="setting-toggle-btn" id="setting-toggle-btn" onclick="toggleSettings()" style="display: none;">¥ ŠwKðŒ‚ÌÝ’èiŒv‰æ‚Ì•ÏXj‚ðŠJ‚­</button>
+<button class="setting-toggle-btn" id="setting-toggle-btn" onclick="toggleSettings()" style="display: none;">â–¼ å­¦ç¿’æ¡ä»¶ã®è¨­å®šï¼ˆè¨ˆç”»ã®å¤‰æ›´ï¼‰ã‚’é–‹ã</button>
 
-    <!-- ƒ‚[ƒh‘I‘ðƒGƒŠƒAi–Ú—§‚ÂƒJ[ƒhŒ^ƒ{ƒbƒNƒXj -->
+    <!-- ãƒ¢ãƒ¼ãƒ‰é¸æŠžã‚¨ãƒªã‚¢ï¼ˆç›®ç«‹ã¤ã‚«ãƒ¼ãƒ‰åž‹ãƒœãƒƒã‚¯ã‚¹ï¼‰ -->
     
-<!-- ƒQ[ƒ€ƒ‚[ƒhÝ’è -->
+<!-- ã‚²ãƒ¼ãƒ ãƒ¢ãƒ¼ãƒ‰è¨­å®š -->
 
 <section class="plan-type-section" id="display-mode-section">
     <div class="plan-type-header">
-        <h2>•\Ž¦ƒ‚[ƒh‚Ì‘I‘ð</h2>
+        <h2>è¡¨ç¤ºãƒ¢ãƒ¼ãƒ‰ã®é¸æŠž</h2>
         <p class="plan-type-subtext">
-            ‚¨D‚Ý‚Ì•\Ž¦ƒ‚[ƒh‚ð‘I‘ð‚µ‚Ä‚­‚¾‚³‚¢B
-            Œã‚©‚ç‚¢‚Â‚Å‚à•ÏX‚Å‚«‚Ü‚·B
+            ãŠå¥½ã¿ã®è¡¨ç¤ºãƒ¢ãƒ¼ãƒ‰ã‚’é¸æŠžã—ã¦ãã ã•ã„ã€‚
+            å¾Œã‹ã‚‰ã„ã¤ã§ã‚‚å¤‰æ›´ã§ãã¾ã™ã€‚
         </p>
     </div>
 
@@ -228,9 +228,9 @@ window.MathJax = {
                    value="normal" checked
                    onchange="updateDisplayModeUI()">
             <div class="card-content">
-                <div class="card-title">’Êíƒ‚[ƒh</div>
+                <div class="card-title">é€šå¸¸ãƒ¢ãƒ¼ãƒ‰</div>
                 <p class="card-desc">
-                    ƒVƒ“ƒvƒ‹‚ÉŠwKŒv‰æ‚ðŠÇ—‚·‚é
+                    ã‚·ãƒ³ãƒ—ãƒ«ã«å­¦ç¿’è¨ˆç”»ã‚’ç®¡ç†ã™ã‚‹
                 </p>
             </div>
         </label>
@@ -240,9 +240,9 @@ window.MathJax = {
                    value="game"
                    onchange="updateDisplayModeUI()">
             <div class="card-content">
-                <div class="card-title">ƒQ[ƒ€ƒ‚[ƒh</div>
+                <div class="card-title">ã‚²ãƒ¼ãƒ ãƒ¢ãƒ¼ãƒ‰</div>
                 <p class="card-desc">
-                    ‚¨’ë‚âˆç¬ƒQ[ƒ€‚ðŠy‚µ‚Ý‚È‚ª‚çŠwK‚·‚é
+                    ãŠåº­ã‚„è‚²æˆã‚²ãƒ¼ãƒ ã‚’æ¥½ã—ã¿ãªãŒã‚‰å­¦ç¿’ã™ã‚‹
                 </p>
             </div>
         </label>
@@ -252,78 +252,78 @@ window.MathJax = {
 
 
     <div class="form-section" id="form-section">
-        <h2>ŠwKðŒ‚ÌÝ’è</h2>
+        <h2>å­¦ç¿’æ¡ä»¶ã®è¨­å®š</h2>
 
         <div class="form-group">
-            <label for="test-date">ƒeƒXƒg‚Ì“ú•tF</label>
+            <label for="test-date">ãƒ†ã‚¹ãƒˆã®æ—¥ä»˜ï¼š</label>
             <input type="date" id="test-date" onchange="renderMiniCalendarPicker()">
         </div>
 
-        <!-- ‹³‰È“ü—Í -->
+        <!-- æ•™ç§‘å…¥åŠ› -->
         <div class="form-group">
-            <label>ƒeƒXƒg‚Ì‹³‰È</label>
+            <label>ãƒ†ã‚¹ãƒˆã®æ•™ç§‘</label>
             <input
                 type="text"
                 id="subject-input"
-                placeholder="—áF‰pŒê, ”Šw, ‘Œê"
+                placeholder="ä¾‹ï¼šè‹±èªž, æ•°å­¦, å›½èªž"
                 oninput="updateWeakSubjectOptions()">
         </div>
 
         <div class="form-group">
-            <label>‹êŽèE‚½‚­‚³‚ñ‚â‚è‚½‚¢‹³‰ÈF</label>
+            <label>è‹¦æ‰‹ãƒ»ãŸãã•ã‚“ã‚„ã‚ŠãŸã„æ•™ç§‘ï¼š</label>
             <div id="weak-subjects-checkboxes" class="checkbox-group"></div>
         </div>
 
         <div class="form-group">
-            <label>‹êŽè‹³‰È‚Ì•×‹­—Ê‚Ì‘‚â‚µ•ûi”{—¦jF</label>
+            <label>è‹¦æ‰‹æ•™ç§‘ã®å‹‰å¼·é‡ã®å¢—ã‚„ã—æ–¹ï¼ˆå€çŽ‡ï¼‰ï¼š</label>
             <div class="radio-group">
-                <label class="radio-item"><input type="radio" name="weakRatio" value="1.5" onchange="if(daysArray.length>0){reallocatePlan(); renderCalendar(); renderChecker();}"> 1.5”{</label>
-                <label class="radio-item"><input type="radio" name="weakRatio" value="2.0" checked onchange="if(daysArray.length>0){reallocatePlan(); renderCalendar(); renderChecker();}"> 2”{i•W€j</label>
-                <label class="radio-item"><input type="radio" name="weakRatio" value="3.0" onchange="if(daysArray.length>0){reallocatePlan(); renderCalendar(); renderChecker();}"> 3”{</label>
+                <label class="radio-item"><input type="radio" name="weakRatio" value="1.5" onchange="if(daysArray.length>0){reallocatePlan(); renderCalendar(); renderChecker();}"> 1.5å€</label>
+                <label class="radio-item"><input type="radio" name="weakRatio" value="2.0" checked onchange="if(daysArray.length>0){reallocatePlan(); renderCalendar(); renderChecker();}"> 2å€ï¼ˆæ¨™æº–ï¼‰</label>
+                <label class="radio-item"><input type="radio" name="weakRatio" value="3.0" onchange="if(daysArray.length>0){reallocatePlan(); renderCalendar(); renderChecker();}"> 3å€</label>
             </div>
         </div>
 
         <div class="form-group">
-            <label for="daily-hours">1“ú‚ÌŠî–{•×‹­ŽžŠÔiŽžŠÔ / Å‘å10ŽžŠÔjF</label>
+            <label for="daily-hours">1æ—¥ã®åŸºæœ¬å‹‰å¼·æ™‚é–“ï¼ˆæ™‚é–“ / æœ€å¤§10æ™‚é–“ï¼‰ï¼š</label>
             <input type="number" id="daily-hours" value="2" min="1" max="10">
         </div>
 
         <div class="form-group">
-            <label>‚¨‹x‚Ýi•×‹­‚Å‚«‚È‚¢“új‚ðƒJƒŒƒ“ƒ_[‚ÅŽ–‘O‚É‘I‚ÔF</label>
-            <p class="sub-info">¦“ú•t˜g‚ðƒNƒŠƒbƒN‚·‚é‚ÆÔFi‚¨‹x‚Ýj‚ÉØ‚è‘Ö‚í‚è‚Ü‚·B</p>
+            <label>ãŠä¼‘ã¿ï¼ˆå‹‰å¼·ã§ããªã„æ—¥ï¼‰ã‚’ã‚«ãƒ¬ãƒ³ãƒ€ãƒ¼ã§äº‹å‰ã«é¸ã¶ï¼š</label>
+            <p class="sub-info">â€»æ—¥ä»˜æž ã‚’ã‚¯ãƒªãƒƒã‚¯ã™ã‚‹ã¨èµ¤è‰²ï¼ˆãŠä¼‘ã¿ï¼‰ã«åˆ‡ã‚Šæ›¿ã‚ã‚Šã¾ã™ã€‚</p>
             <div id="mini-calendar-picker"></div>
         </div>
 
-        <button class="generate-btn" onclick="generatePlan()">Œv‰æ•\‚ðŽ©“®¶¬‚·‚éI</button>
-        <button class="reset-plan-btn" id="reset-plan-btn" onclick="resetSavedPlan()" style="display:none;">Œ»Ý‚ÌŒv‰æ‚ðƒNƒŠƒA‚µ‚ÄÅ‰‚©‚ç‚â‚è’¼‚·</button>
+        <button class="generate-btn" onclick="generatePlan()">è¨ˆç”»è¡¨ã‚’è‡ªå‹•ç”Ÿæˆã™ã‚‹ï¼</button>
+        <button class="reset-plan-btn" id="reset-plan-btn" onclick="resetSavedPlan()" style="display:none;">ç¾åœ¨ã®è¨ˆç”»ã‚’ã‚¯ãƒªã‚¢ã—ã¦æœ€åˆã‹ã‚‰ã‚„ã‚Šç›´ã™</button>
     </div>
-<!--ƒ}ƒCƒy[ƒW-->
+<!--ãƒžã‚¤ãƒšãƒ¼ã‚¸-->
 <div id="mypage" class="mypage" style="display: none;">
 
-    <h2>ƒ}ƒCƒy[ƒW</h2>
+    <h2>ãƒžã‚¤ãƒšãƒ¼ã‚¸</h2>
 
     <div class="mypage-welcome">
-        ‚±‚ñ‚É‚¿‚ÍA<span id="mypage-name"></span>‚³‚ñI
+        ã“ã‚“ã«ã¡ã¯ã€<span id="mypage-name"></span>ã•ã‚“ï¼
     </div>
 
     <div class="mypage-stats">
 
         <div class="mypage-stat-card">
-            <div class="mypage-stat-title">—ÝŒv‚Å•×‹­‚µ‚½ƒRƒ}</div>
-            <div class="mypage-stat-value" id="stat-completed">0 ƒRƒ}</div>
+            <div class="mypage-stat-title">ç´¯è¨ˆã§å‹‰å¼·ã—ãŸã‚³ãƒž</div>
+            <div class="mypage-stat-value" id="stat-completed">0 ã‚³ãƒž</div>
         </div>
 
         <div class="mypage-stat-card">
-            <div class="mypage-stat-title">—ÝŒv‚Å’Ç‰Á‚Å•×‹­‚µ‚½ƒRƒ}</div>
-            <div class="mypage-stat-value" id="stat-extra">0 ƒRƒ}</div>
+            <div class="mypage-stat-title">ç´¯è¨ˆã§è¿½åŠ ã§å‹‰å¼·ã—ãŸã‚³ãƒž</div>
+            <div class="mypage-stat-value" id="stat-extra">0 ã‚³ãƒž</div>
         </div>
         
 <div class="mypage-status">
-    <div class="mypage-stat-title">•×‹­‚â‚èž‚ÝƒXƒe[ƒ^ƒX</div>
+    <div class="mypage-stat-title">å‹‰å¼·ã‚„ã‚Šè¾¼ã¿ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹</div>
 
     <div>
         <span class="level-text" id="mypage-level-disp">Lv.1</span>
-        <span class="title-badge" id="mypage-title-disp">‚Ì‚Ñ‘¾‹‰</span>
+        <span class="title-badge" id="mypage-title-disp">ã®ã³å¤ªç´š</span>
     </div>
 
     <div class="bar-container">
@@ -331,64 +331,64 @@ window.MathJax = {
     </div>
 
     <div class="percent-num" id="mypage-percent-disp">
-        0 ƒRƒ}
+        0 ã‚³ãƒž
     </div>
 </div>
 
 <div class="mypage-stat-card">
-    <div class="mypage-stat-title">—ÝŒv•×‹­ŽžŠÔ</div>
-    <div class="mypage-stat-value" id="stat-study-time">0ŽžŠÔ</div>
+    <div class="mypage-stat-title">ç´¯è¨ˆå‹‰å¼·æ™‚é–“</div>
+    <div class="mypage-stat-value" id="stat-study-time">0æ™‚é–“</div>
 </div>
 
     </div>
     
-<!-- Žè“®ŠwK‹L˜^ -->
+<!-- æ‰‹å‹•å­¦ç¿’è¨˜éŒ² -->
 <div class="manual-study-section">
-    <h3>•×‹­‹L˜^‚ð’Ç‰Á</h3>
+    <h3>å‹‰å¼·è¨˜éŒ²ã‚’è¿½åŠ </h3>
 
-    <label for="record-date">•×‹­‚µ‚½“ú</label>
+    <label for="record-date">å‹‰å¼·ã—ãŸæ—¥</label>
     <input type="date" id="record-date">
 
-    <label for="record-subject">‹³‰È</label>
+    <label for="record-subject">æ•™ç§‘</label>
     <select id="record-subject">
-        <option value="">‹³‰È‚ð‘I‘ð‚µ‚Ä‚­‚¾‚³‚¢</option>
+        <option value="">æ•™ç§‘ã‚’é¸æŠžã—ã¦ãã ã•ã„</option>
     </select>
 
-    <label>•×‹­‚µ‚½ŽžŠÔ</label>
+    <label>å‹‰å¼·ã—ãŸæ™‚é–“</label>
     <div class="record-time-inputs">
         <input type="number" id="record-hours"
                min="0" max="24" value="0">
-        <span>ŽžŠÔ</span>
+        <span>æ™‚é–“</span>
         <input type="number" id="record-minutes"
                min="0" max="59" value="30">
-        <span>•ª</span>
+        <span>åˆ†</span>
     </div>
 
-    <label for="record-memo">•×‹­“à—ei”CˆÓj</label>
+    <label for="record-memo">å‹‰å¼·å†…å®¹ï¼ˆä»»æ„ï¼‰</label>
     <textarea id="record-memo"
-              placeholder="—áF”Šw‚Ì–â‘èW‚ð5ƒy[ƒWi‚ß‚½"></textarea>
+              placeholder="ä¾‹ï¼šæ•°å­¦ã®å•é¡Œé›†ã‚’5ãƒšãƒ¼ã‚¸é€²ã‚ãŸ"></textarea>
 
     <button type="button"
             class="record-save-btn"
             onclick="saveManualStudyRecord()">
-        ‹L˜^‚ð•Û‘¶‚·‚é
+        è¨˜éŒ²ã‚’ä¿å­˜ã™ã‚‹
     </button>
 
-    <h3>“ü—Í‚µ‚½•×‹­‹L˜^</h3>
+    <h3>å…¥åŠ›ã—ãŸå‹‰å¼·è¨˜éŒ²</h3>
     <p id="manual-study-total"></p>
     <div id="manual-study-list"></div>
 </div>
 
     <div class="learning-history-section">
-        <h3>ŠwK‹L˜^</h3>
+        <h3>å­¦ç¿’è¨˜éŒ²</h3>
         <div id="learning-history-list"></div>
     </div>
     
-<!-- “_””äŠr‹@”\ -->
+<!-- ç‚¹æ•°æ¯”è¼ƒæ©Ÿèƒ½ -->
 <div id="score-comparison-section" class="score-comparison-section">
-    <h2>“_””äŠr</h2>
+    <h2>ç‚¹æ•°æ¯”è¼ƒ</h2>
     <p class="score-comparison-description">
-        Ž©•ª‚Ì“_”‚Æ•½‹Ï“_‚ð”ä‚×‚Ä‚Ý‚æ‚¤I
+        è‡ªåˆ†ã®ç‚¹æ•°ã¨å¹³å‡ç‚¹ã‚’æ¯”ã¹ã¦ã¿ã‚ˆã†ï¼
     </p>
 
     
@@ -400,11 +400,11 @@ window.MathJax = {
         id="show-score-chart-btn"
         class="show-score-chart-btn"
         onclick="showScoreChart()">
-        ƒ`ƒƒ[ƒg‚ð•\Ž¦
+        ãƒãƒ£ãƒ¼ãƒˆã‚’è¡¨ç¤º
     </button>
 
     <p id="score-chart-message" class="score-chart-message">
-        Ž©•ª‚Ì“_”‚Æ•½‹Ï“_‚ð“ü—Í‚µ‚Ä‚ËB
+        è‡ªåˆ†ã®ç‚¹æ•°ã¨å¹³å‡ç‚¹ã‚’å…¥åŠ›ã—ã¦ã­ã€‚
     </p>
 </div>
 
@@ -413,7 +413,7 @@ window.MathJax = {
         type="button"
         class="edit-score-btn"
         onclick="editScoreInputs()">
-        © “_”‚ð•ÒW‚·‚é
+        â† ç‚¹æ•°ã‚’ç·¨é›†ã™ã‚‹
     </button>
 
     <div class="score-chart-container">
@@ -427,46 +427,46 @@ window.MathJax = {
 
 
     <button class="back-plan-btn" onclick="showStudyPage()">
-        © ŠwKŒv‰æ‚É–ß‚é
+        â† å­¦ç¿’è¨ˆç”»ã«æˆ»ã‚‹
     </button>
 
 </div>
 
-<!-- —ûK–â‘èƒy[ƒW -->
+<!-- ç·´ç¿’å•é¡Œãƒšãƒ¼ã‚¸ -->
 <div id="practice-page" class="practice-page" style="display: none;">
 
-<!-- Å‰‚É•\Ž¦‚·‚éÝ’è‰æ–Ê -->
+<!-- æœ€åˆã«è¡¨ç¤ºã™ã‚‹è¨­å®šç”»é¢ -->
     <div id="practice-setting">
 
-        <h2>—ûK–â‘è</h2>
+        <h2>ç·´ç¿’å•é¡Œ</h2>
 
-        <h3>‹³‰È‚ð‘I‘ð‚µ‚Ä‚­‚¾‚³‚¢</h3>
+        <h3>æ•™ç§‘ã‚’é¸æŠžã—ã¦ãã ã•ã„</h3>
 
         <div class="subject-buttons">
-            <button type="button" onclick="selectSubject('‘Œê', this)">‘Œê</button>
-            <button type="button" onclick="selectSubject('”ŠwA', this)">”ŠwA</button>
-            <button type="button" onclick="selectSubject('”ŠwIII', this)">”ŠwIII</button>
-            <button type="button" onclick="selectSubject('‰pŒêi•¶–@j', this)">‰pŒêi•¶–@j</button>
-            <button type="button" onclick="selectSubject('‰ÈŠw', this)">‰ÈŠw</button>
-            <button type="button" onclick="selectSubject('—ðŽj', this)">—ðŽj</button>
-            <button type="button" onclick="selectSubject('­Ž¡ŒoÏ', this)">­Ž¡ŒoÏ</button>
-            <button type="button" onclick="selectSubject('“d—Í', this)">“d—Í</button>
-             <button type="button" onclick="selectSubject('“dŽq‰ž—p', this)">“dŽq‰ž—p</button>
-            <button type="button" onclick="selectSubject('Œv‘ª§Œä', this)">Œv‘ª§Œä</button>
+            <button type="button" onclick="selectSubject('å›½èªž', this)">å›½èªž</button>
+            <button type="button" onclick="selectSubject('æ•°å­¦A', this)">æ•°å­¦A</button>
+            <button type="button" onclick="selectSubject('æ•°å­¦III', this)">æ•°å­¦III</button>
+            <button type="button" onclick="selectSubject('è‹±èªžï¼ˆæ–‡æ³•ï¼‰', this)">è‹±èªžï¼ˆæ–‡æ³•ï¼‰</button>
+            <button type="button" onclick="selectSubject('ç§‘å­¦', this)">ç§‘å­¦</button>
+            <button type="button" onclick="selectSubject('æ­´å²', this)">æ­´å²</button>
+            <button type="button" onclick="selectSubject('æ”¿æ²»çµŒæ¸ˆ', this)">æ”¿æ²»çµŒæ¸ˆ</button>
+            <button type="button" onclick="selectSubject('é›»åŠ›', this)">é›»åŠ›</button>
+             <button type="button" onclick="selectSubject('é›»å­å¿œç”¨', this)">é›»å­å¿œç”¨</button>
+            <button type="button" onclick="selectSubject('è¨ˆæ¸¬åˆ¶å¾¡', this)">è¨ˆæ¸¬åˆ¶å¾¡</button>
         </div>
 
-        <h3>–â‘è”‚ð‘I‘ð‚µ‚Ä‚­‚¾‚³‚¢</h3>
+        <h3>å•é¡Œæ•°ã‚’é¸æŠžã—ã¦ãã ã•ã„</h3>
 
         <div class="question-count-buttons">
-            <button type="button" onclick="selectQuestionCount(5, this)">5–â</button>
-            <button type="button" onclick="selectQuestionCount(10, this)">10–â</button>
-            <button type="button" onclick="selectQuestionCount(15, this)">15–â</button>
-            <button type="button" onclick="selectQuestionCount(20, this)">20–â</button>
-            <button type="button" onclick="selectQuestionCount(25, this)">25–â</button>
-            <button type="button" onclick="selectQuestionCount(30, this)">30–â</button>
-            <button type="button" onclick="selectQuestionCount(35, this)">35–â</button>
-            <button type="button" onclick="selectQuestionCount(40, this)">40–â</button>
-            <button type="button" onclick="selectQuestionCount(45, this)">45–â</button>
+            <button type="button" onclick="selectQuestionCount(5, this)">5å•</button>
+            <button type="button" onclick="selectQuestionCount(10, this)">10å•</button>
+            <button type="button" onclick="selectQuestionCount(15, this)">15å•</button>
+            <button type="button" onclick="selectQuestionCount(20, this)">20å•</button>
+            <button type="button" onclick="selectQuestionCount(25, this)">25å•</button>
+            <button type="button" onclick="selectQuestionCount(30, this)">30å•</button>
+            <button type="button" onclick="selectQuestionCount(35, this)">35å•</button>
+            <button type="button" onclick="selectQuestionCount(40, this)">40å•</button>
+            <button type="button" onclick="selectQuestionCount(45, this)">45å•</button>
         </div>
 
         <button
@@ -474,37 +474,37 @@ window.MathJax = {
             id="practice-start-btn"
             onclick="startSelectedPractice()"
             disabled>
-            —ûK–â‘è‚ðŽn‚ß‚é
+            ç·´ç¿’å•é¡Œã‚’å§‹ã‚ã‚‹
         </button>
 
         <button 
             type="button" 
             class="back-plan-btn" 
             onclick="showStudyPage()">
-            © ŠwKŒv‰æ‚É–ß‚é
+            â† å­¦ç¿’è¨ˆç”»ã«æˆ»ã‚‹
         </button>
 
     </div>
 
 
-    <!-- –â‘è‰æ–Ê -->
-    <!-- Å‰‚Í”ñ•\Ž¦ -->
+    <!-- å•é¡Œç”»é¢ -->
+    <!-- æœ€åˆã¯éžè¡¨ç¤º -->
     <div id="practice-question-area" style="display: none;">
 
-        <h2>—ûK–â‘è</h2>
+        <h2>ç·´ç¿’å•é¡Œ</h2>
 <div id="practice-retry-label" class="practice-retry-label" style="display: none;">
-    ŠÔˆá‚¦‚½–â‘è‚ð•œK’†
+    é–“é•ãˆãŸå•é¡Œã‚’å¾©ç¿’ä¸­
 </div>
         <div
             class="practice-question-number"
             id="practice-question-number">
-            ‘æ1–â
+            ç¬¬1å•
         </div>
 
         <div
             class="practice-question"
             id="practice-question">
-            –â‘è•¶‚ª‚±‚±‚É•\Ž¦‚³‚ê‚Ü‚·B
+            å•é¡Œæ–‡ãŒã“ã“ã«è¡¨ç¤ºã•ã‚Œã¾ã™ã€‚
         </div>
 
         <div
@@ -522,103 +522,103 @@ window.MathJax = {
     class="practice-next-btn"
     onclick="nextPracticeQuestion()"
     style="display: none;">
-    ŽŸ‚Ì–â‘è ¨
+    æ¬¡ã®å•é¡Œ â†’
 </button>
 
-<!-- ŠÔˆá‚¦‚½–â‘è‚ð‚à‚¤ˆê‰ñ -->
+<!-- é–“é•ãˆãŸå•é¡Œã‚’ã‚‚ã†ä¸€å›ž -->
 <button
 	type="button"
     id="practice-wrong-btn"
     class="practice-next-btn"
     onclick="retryWrongQuestions()"
     style="display: none;">
-    ŠÔˆá‚¦‚½–â‘è‚ð‚à‚¤ˆê‰ñ
+    é–“é•ãˆãŸå•é¡Œã‚’ã‚‚ã†ä¸€å›ž
 </button>
 
-<!-- ŠwKŒv‰æ‚É–ß‚é -->
+<!-- å­¦ç¿’è¨ˆç”»ã«æˆ»ã‚‹ -->
 <button 
     class="practice-back-mypage-btn" 
     onclick="showStudyPage()">
-    © ŠwKŒv‰æ‚É–ß‚é
+    â† å­¦ç¿’è¨ˆç”»ã«æˆ»ã‚‹
 </button>
 
-    </div> <!-- practice-question-area ‚ð•Â‚¶‚é -->
+    </div> <!-- practice-question-area ã‚’é–‰ã˜ã‚‹ -->
 
-</div> <!-- practice-setting ‚ð•Â‚¶‚é -->
+</div> <!-- practice-setting ã‚’é–‰ã˜ã‚‹ -->
 
-</div> <!-- practice-page ‚ð•Â‚¶‚é -->
+</div> <!-- practice-page ã‚’é–‰ã˜ã‚‹ -->
 
 
     <div class="result-layout" id="result-layout" style="display: none;">
         
         <div class="top-dashboard-grid" id="dashboard" style="grid-column: 1 / -1;">
             <div class="dash-card">
-                <h3>ŠwKƒ_ƒbƒVƒ…ƒ{[ƒh</h3>
+                <h3>å­¦ç¿’ãƒ€ãƒƒã‚·ãƒ¥ãƒœãƒ¼ãƒ‰</h3>
                 <div class="dash-stats">
                     <div class="stat-box">
-                        <span class="stat-label">ƒeƒXƒg‚Ü‚Å</span>
-                        <span class="stat-value" id="dash-days-left">-- “ú</span>
+                        <span class="stat-label">ãƒ†ã‚¹ãƒˆã¾ã§</span>
+                        <span class="stat-value" id="dash-days-left">-- æ—¥</span>
                     </div>
                     <div class="stat-box">
-                        <span class="stat-label">¡“ú‚Ì—\’èƒRƒ}</span>
-                        <span class="stat-value" id="dash-today-tasks">-- ƒRƒ}</span>
+                        <span class="stat-label">ä»Šæ—¥ã®äºˆå®šã‚³ãƒž</span>
+                        <span class="stat-value" id="dash-today-tasks">-- ã‚³ãƒž</span>
                     </div>
                     <div class="stat-box">
-						<span class="stat-label">˜A‘±ŠwK</span>
-						<span class="stat-value" id="dash-streak">0“ú</span>
+						<span class="stat-label">é€£ç¶šå­¦ç¿’</span>
+						<span class="stat-value" id="dash-streak">0æ—¥</span>
 					</div>
                 </div>
             </div>
 
             <div class="dash-card" id="timer-section">
-    <h3>W’†ƒ|ƒ‚ƒh[ƒƒ^ƒCƒ}[</h3>
+    <h3>é›†ä¸­ãƒãƒ¢ãƒ‰ãƒ¼ãƒ­ã‚¿ã‚¤ãƒžãƒ¼</h3>
 
-    <!-- 3E2E1‚ÌƒJƒEƒ“ƒgƒ_ƒEƒ“•\Ž¦ -->
+    <!-- 3ãƒ»2ãƒ»1ã®ã‚«ã‚¦ãƒ³ãƒˆãƒ€ã‚¦ãƒ³è¡¨ç¤º -->
     <div class="timer-countdown" id="timer-countdown"></div>
 
-    <!-- ƒ^ƒCƒ}[ -->
+    <!-- ã‚¿ã‚¤ãƒžãƒ¼ -->
     <div class="timer-display" id="timer-display">25:00</div>
 
-    <!-- ó‘Ô•\Ž¦ -->
+    <!-- çŠ¶æ…‹è¡¨ç¤º -->
     <div class="timer-status" id="timer-status">
-        ƒXƒ^[ƒg‚ð‰Ÿ‚µ‚ÄŠwK‚ðŽn‚ß‚æ‚¤I
+        ã‚¹ã‚¿ãƒ¼ãƒˆã‚’æŠ¼ã—ã¦å­¦ç¿’ã‚’å§‹ã‚ã‚ˆã†ï¼
     </div>
 
     <div class="timer-controls">
-        <button class="timer-btn start" onclick="startTimer()">ƒXƒ^[ƒg</button>
-        <button class="timer-btn stop" onclick="stopTimer()">ˆêŽž’âŽ~</button>
-        <button class="timer-btn reset" onclick="resetTimer()">ƒŠƒZƒbƒg</button>
+        <button class="timer-btn start" onclick="startTimer()">ã‚¹ã‚¿ãƒ¼ãƒˆ</button>
+        <button class="timer-btn stop" onclick="stopTimer()">ä¸€æ™‚åœæ­¢</button>
+        <button class="timer-btn reset" onclick="resetTimer()">ãƒªã‚»ãƒƒãƒˆ</button>
     </div>
 </div>
 
         <div class="checker-panel">
-            <h2>–ˆ“úƒ`ƒFƒbƒJ[</h2>
+            <h2>æ¯Žæ—¥ãƒã‚§ãƒƒã‚«ãƒ¼</h2>
             <p style="font-size: 13px; color: #64748b; margin-bottom: 12px; line-height: 1.4;">
-                I‚í‚Á‚½‚çƒ`ƒFƒbƒN‚ð“ü‚ê‚æ‚¤I
+                çµ‚ã‚ã£ãŸã‚‰ãƒã‚§ãƒƒã‚¯ã‚’å…¥ã‚Œã‚ˆã†ï¼
             </p>
 
             <div class="progress-box">
-                <div class="progress-box-title">•×‹­‚â‚èž‚ÝƒXƒe[ƒ^ƒX</div>
+                <div class="progress-box-title">å‹‰å¼·ã‚„ã‚Šè¾¼ã¿ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹</div>
                 <div>
                     <span class="level-text" id="level-disp">Lv.1</span>
-                    <span class="title-badge" id="title-disp">‚Ì‚Ñ‘¾‹‰</span>
+                    <span class="title-badge" id="title-disp">ã®ã³å¤ªç´š</span>
                 </div>
                 <div class="bar-container">
                     <div class="bar-fill" id="bar-fill-disp"></div>
                 </div>
-                <div class="percent-num" id="percent-disp">0 / 0 ƒRƒ} (0%)</div>
+                <div class="percent-num" id="percent-disp">0 / 0 ã‚³ãƒž (0%)</div>
             </div>
 
             <div id="checker-list-container">
-                <div class="checker-section-title" style="color: #3b82f6;"> ¡“ú‚Ì•×‹­ƒ^ƒXƒN</div>
+                <div class="checker-section-title" style="color: #3b82f6;"> ä»Šæ—¥ã®å‹‰å¼·ã‚¿ã‚¹ã‚¯</div>
                 <div id="today-tasks-box" class="today-card"></div>
 
 			<button class="extra-study-btn" onclick="addExtraStudy()">
-				{‚à‚¤­‚µ•×‹­‚·‚é
+				ï¼‹ã‚‚ã†å°‘ã—å‹‰å¼·ã™ã‚‹
 			</button>
     
                 
-<!-- ‚±‚ê‚©‚ç‚Ì—\’èFŠJ•ÂŽ® -->
+<!-- ã“ã‚Œã‹ã‚‰ã®äºˆå®šï¼šé–‹é–‰å¼ -->
 <div class="upcoming-section">
 
     <button
@@ -630,7 +630,7 @@ window.MathJax = {
         onclick="toggleUpcomingSchedule()">
 
         <span id="upcoming-toggle-text">
-            { ‚±‚ê‚©‚ç‚Ì—\’è‚ðŒ©‚é
+            ï¼‹ ã“ã‚Œã‹ã‚‰ã®äºˆå®šã‚’è¦‹ã‚‹
         </span>
 
         <span id="upcoming-toggle-icon"></span>
@@ -641,7 +641,7 @@ window.MathJax = {
 
             <div class="checker-section-title"
                  style="color: #1e293b;">
-                ‚±‚ê‚©‚ç‚Ì—\’è
+                ã“ã‚Œã‹ã‚‰ã®äºˆå®š
             </div>
 
             <div id="upcoming-tasks-box"
@@ -652,15 +652,15 @@ window.MathJax = {
 
 </div>  
 
-<!-- ‰ß‹Ž‚Ì—\’è—pƒRƒ“ƒeƒi (ƒGƒ‰[–hŽ~—p) -->
+<!-- éŽåŽ»ã®äºˆå®šç”¨ã‚³ãƒ³ãƒ†ãƒŠ (ã‚¨ãƒ©ãƒ¼é˜²æ­¢ç”¨) -->
 <div id="past-tasks-box" style="display: none;"></div>
                 
             </div>
         </div>
 
         <div class="calendar-panel">
-            <h2>‘S‘ÌƒJƒŒƒ“ƒ_[</h2>
-            <p class="sub-info">¦ƒJƒŒƒ“ƒ_[‚Ì“ú•t˜g‚ðƒNƒŠƒbƒN‚·‚é‚Æ•×‹­ŽžŠÔ‚ð•ÏX‚Å‚«‚Ü‚·iÅ‘å10ŽžŠÔ˜g‚Ü‚ÅÝ’è‰Â”\jB</p>
+            <h2>å…¨ä½“ã‚«ãƒ¬ãƒ³ãƒ€ãƒ¼</h2>
+            <p class="sub-info">â€»ã‚«ãƒ¬ãƒ³ãƒ€ãƒ¼ã®æ—¥ä»˜æž ã‚’ã‚¯ãƒªãƒƒã‚¯ã™ã‚‹ã¨å‹‰å¼·æ™‚é–“ã‚’å¤‰æ›´ã§ãã¾ã™ï¼ˆæœ€å¤§10æ™‚é–“æž ã¾ã§è¨­å®šå¯èƒ½ï¼‰ã€‚</p>
             <div id="calendar-container"></div>
         </div>
     </div>
@@ -669,11 +669,11 @@ window.MathJax = {
 </div>
 
 <script src="script.js"></script>
-<!-- ‚¨–â‚¢‡‚í‚¹ -->
+<!-- ãŠå•ã„åˆã‚ã› -->
 <div class="contact-area">
-    <p>‚¨–â‚¢‡‚í‚¹EƒoƒO•ñ‚Í‚±‚¿‚ç</p>
+    <p>ãŠå•ã„åˆã‚ã›ãƒ»ãƒã‚°å ±å‘Šã¯ã“ã¡ã‚‰</p>
     <a href="https://docs.google.com/forms/d/e/1FAIpQLSejkHN22OnPyrdoUX5LqA77FRDLvSj128zdiJsv9yqS_l8Pcw/viewform?usp=header" target="_blank" rel="noopener noreferrer">
-        ‚¨–â‚¢‡‚í‚¹EƒoƒO•ñƒtƒH[ƒ€
+        ãŠå•ã„åˆã‚ã›ãƒ»ãƒã‚°å ±å‘Šãƒ•ã‚©ãƒ¼ãƒ 
     </a>
 </div>
 </body>
