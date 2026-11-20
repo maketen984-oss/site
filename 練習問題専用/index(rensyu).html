@@ -1,0 +1,146 @@
+
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>練習問題</title>
+<link rel="stylesheet" href="style.css">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]}};</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+<div class="container practice-standalone-container">
+<div id="practice-page" class="practice-page">
+
+<!-- 最初に表示する設定画面 -->
+    <div id="practice-setting">
+
+        <h2>練習問題</h2>
+
+        <h3>教科を選択してください</h3>
+
+        <div class="subject-buttons">
+            <button type="button" onclick="selectSubject('漢字2年', this)">漢字2年</button>
+            <button type="button" onclick="selectSubject('数学A', this)">数学A</button>
+            <button type="button" onclick="selectSubject('数学III', this)">数学III</button>
+            <button type="button" onclick="selectSubject('英語（文法）', this)">英語（文法）</button>
+            <button type="button" onclick="selectSubject('英単3年', this)">英単3年</button>
+            <button type="button" onclick="selectSubject('科学', this)">科学</button>
+            <button type="button" onclick="selectSubject('歴史', this)">歴史</button>
+            <button type="button" onclick="selectSubject('政治経済', this)">政治経済</button>
+            <button type="button" onclick="selectSubject('電力', this)">電力</button>
+            <button type="button" onclick="selectSubject('電子応用', this)">電子応用</button>
+            <button type="button" onclick="selectSubject('計測制御', this)">計測制御</button>
+            <button type="button" onclick="selectSubject('漢字3年', this)">漢字3年</button>
+        </div>
+
+        <h3>問題数を選択してください</h3>
+
+        <div class="question-count-buttons">
+            <button type="button" onclick="selectQuestionCount(5, this)">5問</button>
+            <button type="button" onclick="selectQuestionCount(10, this)">10問</button>
+            <button type="button" onclick="selectQuestionCount(15, this)">15問</button>
+            <button type="button" onclick="selectQuestionCount(20, this)">20問</button>
+            <button type="button" onclick="selectQuestionCount(25, this)">25問</button>
+            <button type="button" onclick="selectQuestionCount(30, this)">30問</button>
+            <button type="button" onclick="selectQuestionCount(35, this)">35問</button>
+            <button type="button" onclick="selectQuestionCount(40, this)">40問</button>
+            <button type="button" onclick="selectQuestionCount(45, this)">45問</button>
+        </div>
+
+        <button
+            type="button"
+            id="practice-start-btn"
+            onclick="startSelectedPractice()"
+            disabled>
+            練習問題を始める
+        </button>
+
+<button type="button"
+        class="practice-back-btn"
+        onclick="backToStudyPlan()">
+    ← 学習計画に戻る
+</button>
+
+<a href="https://docs.google.com/forms/d/e/1FAIpQLSejkHN22OnPyrdoUX5LqA77FRDLvSj128zdiJsv9yqS_l8Pcw/viewform?usp=header"
+   class="practice-bug-btn"
+   target="_blank"
+   rel="noopener noreferrer">
+    🐛 お問い合わせ・バグ報告フォーム
+</a>
+    </div>
+
+
+    <!-- 問題画面 -->
+    <!-- 最初は非表示 -->
+    <div id="practice-question-area" style="display: none;">
+
+        <h2>練習問題</h2>
+<div id="practice-retry-label" class="practice-retry-label" style="display: none;">
+    間違えた問題を復習中
+</div>
+        <div
+            class="practice-question-number"
+            id="practice-question-number">
+            第1問
+        </div>
+
+        <div
+            class="practice-question"
+            id="practice-question">
+            問題文がここに表示されます。
+        </div>
+
+        <div
+            id="practice-choices"
+            class="practice-choices">
+        </div>
+
+        <div
+            id="practice-result"
+            class="practice-result">
+        </div>
+
+       <button
+    id="practice-next-btn"
+    class="practice-next-btn"
+    onclick="nextPracticeQuestion()"
+    style="display: none;">
+    次の問題 →
+</button>
+
+<!-- 間違えた問題をもう一回 -->
+<button
+	type="button"
+    id="practice-wrong-btn"
+    class="practice-next-btn"
+    onclick="retryWrongQuestions()"
+    style="display: none;">
+    間違えた問題をもう一回
+</button>
+
+<!-- 学習計画に戻る -->
+<button type="button"
+        class="practice-back-btn"
+        onclick="backToStudyPlan()">
+    ← 学習計画に戻る
+</button>
+
+<a href="https://docs.google.com/forms/d/e/1FAIpQLSejkHN22OnPyrdoUX5LqA77FRDLvSj128zdiJsv9yqS_l8Pcw/viewform?usp=header"
+   class="practice-bug-btn"
+   target="_blank"
+   rel="noopener noreferrer">
+     お問い合わせ・バグ報告フォーム
+</a>
+    </div> <!-- practice-question-area を閉じる -->
+
+</div> <!-- practice-setting を閉じる -->
+
+</div> <!-- practice-page を閉じる -->
+</div>
+<script src="questions.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
