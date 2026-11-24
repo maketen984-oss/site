@@ -1,0 +1,1051 @@
+
+body {
+      background-color: #d6f0e0;
+      background-image: radial-gradient(#bce2cb 20%, transparent 20%);
+      background-size: 24px 24px;
+      font-family: 'Zen Maru Gothic', sans-serif;
+      user-select: none;
+    }
+    .game-box {
+      border: 3px solid #7d5c43;
+      border-radius: 16px;
+      background-color: #fffef6;
+      box-shadow: 0 5px 0 #5c412e;
+    }
+    .game-badge {
+      background: linear-gradient(180deg, #ffd768 0%, #ffab2d 100%);
+      border: 2px solid #7d5c43;
+      box-shadow: inset 0 2px 0 rgba(255,255,255,0.6);
+    }
+    .btn-wood {
+      background: linear-gradient(180deg, #eed8a1 0%, #d1ab6d 100%);
+      border: 2px solid #6e4e37;
+      color: #4a3221;
+      font-weight: 700;
+      box-shadow: 0 4px 0 #503724;
+      transition: all 0.1s;
+    }
+    .btn-wood:active {
+      transform: translateY(3px);
+      box-shadow: 0 1px 0 #503724;
+    }
+    .btn-wood.active {
+      background: linear-gradient(180deg, #78da8a 0%, #44b059 100%);
+      color: #ffffff;
+      border-color: #2b6a37;
+      box-shadow: 0 4px 0 #21522a;
+    }
+  .garden-grid {
+    background-color: #a1e2a1;
+    background-image: url("images/background.png");
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    aspect-ratio: 16 / 9;
+    min-height: 0;
+    border: 4px solid #6b8e23;
+    border-radius: 20px;
+}
+/* 模様替え中のお庭 */
+/* 模様替え中：背景だけを暗くしてぼかす */
+.garden-grid.garden-editing::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(30, 45, 25, 0.22);
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+    border-radius: inherit;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* 配置マークはぼかさず表示 */
+.garden-grid.garden-editing .garden-slot {
+    z-index: 2;
+}
+
+/* 配置したカードもぼかさない */
+.garden-grid.garden-editing .garden-tree-card {
+    z-index: 5;
+}
+
+/* 通常のお庭に表示する木の画像 */
+.garden-tree-image {
+    position: absolute;
+    transform: translate(-50%, -85%);
+
+  width: 120px;
+height: 120px;
+    object-fit: contain;
+
+    pointer-events: none;
+    z-index: 3;
+
+    image-rendering: pixelated;
+}
+
+/* 配置場所の◇ */
+.garden-slot {
+    position: absolute;
+    width: 38px;
+    height: 38px;
+    transform: translate(-50%, -50%) rotate(45deg);
+    border: 3px dashed #fff8d5;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+}
+
+/* 配置中のリンゴの苗カード */
+.garden-tree-card {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    width: 105px;
+	height: 105px;
+    background: #fff8e8;
+    border: 2px solid #d9b989;
+    border-radius: 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    color: #704b2c;
+    font-size: 11px;
+    font-weight: bold;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.15);
+	pointer-events: auto;
+	cursor: pointer;
+    z-index: 5;
+}
+
+.garden-slot:hover {
+    background: rgba(255, 255, 255, 0.65);
+}
+/* 配置場所の種類別カラー */
+.garden-slot.tree { border-color: #39865a; }
+.garden-slot.flower { border-color: #e47ca1; }
+.garden-slot.decor { border-color: #b88646; }
+.garden-slot.animal { border-color: #69a9df; }
+
+/* ＋マーク */
+.garden-slot-plus {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    transform: rotate(-45deg);
+    color: #ffffff;
+    font-size: 22px;
+    font-weight: 900;
+    text-shadow: 0 1px 3px #555;
+}
+
+/* 配置場所の名前 */
+.garden-slot-label {
+    position: absolute;
+    top: 43px;
+    left: 50%;
+    transform: translateX(-50%) rotate(-45deg);
+    background: #fffef5;
+    border: 1px solid #8b7355;
+    border-radius: 8px;
+    padding: 3px 7px;
+    font-size: 11px;
+    font-weight: bold;
+    color: #4a3221;
+    white-space: nowrap;
+}
+/* 花壇だけ横長の四角にする */
+.garden-slot.flower {
+    width: 100px;
+    height: 55px;
+    transform: translate(-50%, -50%);
+    border-radius: 12px;
+}
+
+/* 花壇の＋を横並びにする */
+.garden-slot.flower .garden-slot-plus {
+    transform: none;
+    display: flex;
+    gap: 10px;
+    font-size: 24px;
+}
+
+/* 花壇の名前を下に表示 */
+.garden-slot.flower .garden-slot-label {
+    top: 60px;
+    transform: translateX(-50%);
+}
+
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 8px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: #f1e8d0;
+      border-radius: 10px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #c3a478;
+      border-radius: 10px;
+    }
+    /* お庭と選択パネルの表示領域 */
+.garden-area {
+    position: relative;
+}
+
+/* 右側のアイテム選択パネル */
+#garden-item-panel {
+    position: absolute;
+    top: 100px;
+    right: 12px;
+    bottom: 12px;
+    width: min(300px, 85%);
+    z-index: 20;
+
+    background: #fff9e9;
+    border: 3px solid #8b6846;
+    border-radius: 18px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+
+    padding: 14px;
+    overflow-y: auto;
+}
+
+#garden-item-panel.hidden {
+    display: none;
+}
+
+.garden-panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+.garden-panel-header h3 {
+    font-weight: 900;
+    color: #5b3a24;
+    font-size: 17px;
+}
+
+.garden-panel-header button {
+    background: #f1dfc4;
+    border-radius: 9px;
+    padding: 6px 10px;
+}
+
+.garden-panel-description {
+    font-size: 12px;
+    color: #8b6846;
+    margin: 10px 0;
+}
+
+.garden-item-choice {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 8px;
+    background: #ffffff;
+    border: 2px solid #dfc9a3;
+    border-radius: 12px;
+    text-align: left;
+    cursor: pointer;
+}
+
+.garden-item-choice:hover {
+    background: #e8f7df;
+    border-color: #67b46b;
+}
+
+.garden-choice-icon {
+    font-size: 32px;
+}
+
+.garden-choice-name {
+    font-size: 15px;
+    font-weight: bold;
+    color: #5b3a24;
+}
+
+.garden-choice-count {
+    font-size: 13px;
+    color: #8b6846;
+}
+
+/* 未配置の木 */
+.garden-choice-count.not-planted {
+    color: #956b46;
+}
+
+/* お庭で成長中の木 */
+.garden-choice-count.planted {
+    color: #27834b;
+    font-weight: bold;
+}
+
+/* ショップのコインアイコン */
+.shop-coin-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #ffd34d;
+    border: 2px solid #b77912;
+    color: #8a5100;
+    font-size: 11px;
+    font-weight: 900;
+    vertical-align: middle;
+    box-shadow: inset 0 0 0 1px #fff2a6;
+}
+
+.shop-coin-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #ffd34d;
+    border: 2px solid #b77912;
+    color: #8a5100;
+    font-size: 11px;
+    font-weight: 900;
+    line-height: 1;
+    vertical-align: middle;
+    position: relative;
+    top: -2px;
+    margin-right: 3px;
+}
+
+/* ===== 小物の個別調整 ===== */
+
+.garden-decor-image {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    image-rendering: pixelated;
+}
+
+/* じょうろ */
+.garden-decor-image.decor-watering_can {
+    width: 75px;
+    height: 75px;
+    translate: 0px 0px;
+}
+
+/* キノコランタン */
+.garden-decor-image.decor-mushroom_lantern {
+    width: 75px;
+    height: 75px;
+    margin: 0;
+    translate: 10px 5px;
+}
+
+/* 鳥の巣箱 */
+.garden-decor-image.decor-birdhouse {
+    width: 80px;
+    height: 80px;
+    translate: 0px 0px;
+}
+
+/* 小さな池 */
+.garden-decor-image.decor-pond {
+    width: 85px;
+    height: 85px;
+    translate: 0px 0px;
+}
+
+/* ピクニックシート */
+.garden-decor-image.decor-picnic_sheet {
+    width: 90px;
+    height: 90px;
+    translate: 0px 0px;
+}
+
+/* 切り株 */
+.garden-decor-image.decor-stump {
+    width: 75px;
+    height: 75px;
+    translate: 0px 0px;
+}
+/* ===== お庭の動物 ===== */
+
+.garden-animal-image {
+    width: 85px;
+    height: 85px;
+    object-fit: contain;
+    image-rendering: pixelated;
+}
+
+/* 模様替え中の動物画像 */
+.garden-edit-animal-image {
+    width: 65px;
+    height: 65px;
+    object-fit: contain;
+    image-rendering: pixelated;
+}
+
+/* 動物ごとのサイズ調整 */
+.garden-animal-image.animal-dog {
+    width: 85px;
+    height: 85px;
+}
+
+.garden-animal-image.animal-cat {
+    width: 80px;
+    height: 80px;
+}
+
+.garden-animal-image.animal-rabbit,
+.garden-animal-image.animal-upright_rabbit {
+    width: 85px;
+    height: 85px;
+}
+
+.garden-animal-image.animal-bird {
+    width: 70px;
+    height: 70px;
+}
+/* ===== 動物のぴょんぴょんアニメーション ===== */
+
+.garden-animal-image {
+    animation: animal-hop 1.8s ease-in-out infinite;
+}
+
+@keyframes animal-hop {
+    0%, 15%, 45%, 100% {
+        transform: translate(-50%, -85%);
+    }
+
+    30% {
+        transform: translate(-50%, -105%);
+    }
+}
+
+/* ===== お庭のアイテム選択パネル ===== */
+
+/* 木・小物・動物の画像を統一 */
+.garden-item-choice .garden-choice-image {
+    width: 56px;
+    height: 56px;
+    flex-shrink: 0;
+    object-fit: contain;
+    image-rendering: pixelated;
+}
+
+/* 配置中のアイテム */
+.garden-item-choice.garden-choice-selected {
+    background-color: #e8f7df;
+    border-color: #67b46b;
+}
+
+/* 配置中のアイテム名 */
+.garden-choice-selected .garden-choice-name {
+    color: #356b3d;
+}
+
+/* 配置中の所持数 */
+.garden-choice-selected .garden-choice-count {
+    color: #42834b;
+}
+
+/* 選択肢にマウスを乗せたとき */
+.garden-item-choice:hover {
+    border-color: #8fc98d;
+}
+
+/* 現在の配置欄と選択肢の間隔 */
+#garden-panel-items {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* ===== 花壇の設定パネル ===== */
+
+.garden-flower-heading {
+    font-size: 14px;
+    font-weight: bold;
+    color: #704b2c;
+    margin: 14px 0 8px;
+}
+
+.garden-flower-heading {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.garden-heading-icon {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+    image-rendering: pixelated;
+}
+
+/* ===== 花壇の表示 ===== */
+
+/* 花壇全体 */
+.garden-flower-display {
+    position: absolute;
+    width: 160px;
+    height: 120px;
+    transform: translate(-50%, -80%) scale(1.2);
+    pointer-events: none;
+    z-index: 4;
+}
+
+/* お花：プランターの土から生える位置 */
+.garden-flower-sprite {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+	bottom: 30px;
+    object-fit: contain;
+    image-rendering: pixelated;
+    z-index: 2;
+}
+
+/* 左のお花 */
+.garden-flower-0 {
+    left: 15px;
+}
+
+/* 右のお花 */
+.garden-flower-1 {
+    right: 15px;
+}
+
+/* プランターなしの場合だけ、お花を下に配置 */
+.garden-flower-display:not(:has(.garden-flower-planter-back))
+.garden-flower-sprite {
+    bottom: 0;
+}
+/* 模様替え中の花壇 */
+.garden-flower-editing {
+    pointer-events: auto;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+}
+
+/* 白いカードの背景だけ小さくする */
+.garden-flower-editing::before {
+    content: "";
+    position: absolute;
+    width: 135px;
+    height: 95px;
+    left: 50%;
+    bottom: 5px;
+    transform: translateX(-50%);
+    background: rgba(255, 248, 232, 0.9);
+    border: 2px solid #d9b989;
+    border-radius: 14px;
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* ===== 3層式プランター ===== */
+
+/* 奥パーツと前面パーツの共通設定 */
+.garden-flower-planter-back,
+.garden-flower-planter-front {
+    position: absolute;
+    width: 120px;
+    height: 60px;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    object-fit: contain;
+    image-rendering: pixelated;
+    pointer-events: none;
+}
+
+/* 奥パーツ：一番後ろ */
+.garden-flower-planter-back {
+    z-index: 1;
+}
+
+/* お花：真ん中 */
+.garden-flower-sprite {
+    z-index: 2;
+}
+
+/* 前面パーツ：一番手前 */
+.garden-flower-planter-front {
+    z-index: 3;
+}
+
+/* プランターの奥パーツだけ少し上にずらす */
+.garden-flower-planter-back {
+    bottom: 20px;
+}
+
+/* コスモスだけ少し大きくする */
+.garden-flower-sprite.flower-cosmos {
+    transform: scale(1.15);
+    transform-origin: center bottom;
+}
+
+/* パンジーを左右に広げて咲かせる */
+.garden-flower-sprite.flower-pansy.garden-flower-0 {
+    left: 5px;
+}
+
+.garden-flower-sprite.flower-pansy.garden-flower-1 {
+    right: 5px;
+}
+
+/* 同じお花を2個植えたときだけ、花壇いっぱいに咲かせる */
+.garden-flower-full .garden-flower-sprite {
+    width: 80px;
+    height: 80px;
+}
+
+/* 左のお花 */
+.garden-flower-full .garden-flower-0 {
+    left: 3px;
+}
+
+/* 右のお花 */
+.garden-flower-full .garden-flower-1 {
+    right: 3px;
+}
+
+/* 同じお花を2個植えたときの中央のお花 */
+.garden-flower-full .garden-flower-extra {
+    position: absolute;
+    left: 50%;
+    right: auto;
+    bottom: 33px;
+    width: 80px;
+    height: 80px;
+    transform: translateX(-50%);
+    z-index: 2;
+}
+
+/* コスモスの根元を土に合わせる */
+.garden-flower-sprite.flower-cosmos {
+    bottom: 25px;
+}
+
+/* パンジーだけ少し大きくする */
+.garden-flower-sprite.flower-pansy {
+    transform: scale(1.15);
+    transform-origin: center bottom;
+}
+
+/* 同じパンジー2個のときは拡大しない */
+.garden-flower-full .garden-flower-sprite.flower-pansy {
+    transform: none;
+}
+
+/* 左側に植えたパンジーを少し中央寄りに */
+.garden-flower-0.flower-pansy {
+    left: 40px;
+}
+
+/* 同じパンジー2個のときは元の配置を優先 */
+.garden-flower-full .garden-flower-0.flower-pansy {
+    left: 3px;
+}
+
+/* 同じコスモス2個のとき、中央のお花を大きくする */
+.garden-flower-full .garden-flower-extra.flower-cosmos {
+    width: 90px;
+    height: 90px;
+}
+
+/* 違うお花と組み合わせたパンジーを大きくする */
+.garden-flower-display:not(.garden-flower-full)
+.garden-flower-sprite.flower-pansy {
+    transform: scale(1.3);
+    transform-origin: center bottom;
+    bottom: 28px;
+}
+/* 右側に植えたパンジーを中央寄りにする */
+.garden-flower-1.flower-pansy {
+    right: 40px;
+}
+
+/* パンジー2個のときは元の配置を優先 */
+.garden-flower-full .garden-flower-1.flower-pansy {
+    right: 3px;
+}
+
+
+/* アチーブメント一覧のスクロール */
+.achievement-scroll {
+  max-height: 570px;
+  overflow-y: auto;
+  padding-right: 8px;
+  scrollbar-width: thin;
+  scrollbar-color: #bda58f transparent;
+}
+
+/* Chrome・Edge・Safari */
+.achievement-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+
+.achievement-scroll::-webkit-scrollbar-track {
+  background: transparent;
+  margin: 12px 0;
+}
+
+.achievement-scroll::-webkit-scrollbar-thumb {
+  background: #bda58f;
+  border-radius: 10px;
+}
+
+.achievement-scroll::-webkit-scrollbar-thumb:hover {
+  background: #92735c;
+}
+
+
+/* お庭の木の大きさ */
+.garden-tree-image {
+  width: 145px;
+  height: 145px;
+  object-fit: contain;
+  display: block;
+}
+
+/* =========================================
+   ログインボーナスモーダル
+   ========================================= */
+
+.login-bonus-card {
+  background-color: #fffef5;
+  background-image: radial-gradient(#fde8c8 18%, transparent 18%);
+  background-size: 20px 20px;
+  border: 4px solid #7d5c43;
+  border-radius: 24px;
+  box-shadow: 0 8px 0 #5c412e, 0 15px 30px rgba(0, 0, 0, 0.25);
+  animation: bonus-pop-in 0.28s cubic-bezier(0.22, 1.25, 0.36, 1);
+}
+
+@keyframes bonus-pop-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.86) translateY(12px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* 可愛いリボン見出し */
+.login-bonus-ribbon-wrap {
+  display: flex;
+  justify-content: center;
+  margin-top: -6px;
+}
+
+.login-bonus-ribbon {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(180deg, #ff8fab 0%, #fb6f92 100%);
+  color: #ffffff;
+  font-weight: 900;
+  font-size: 16px;
+  padding: 9px 26px;
+  border-radius: 14px;
+  border: 2.5px solid #9d3b56;
+  box-shadow: 0 4px 0 #9d3b56;
+  text-shadow: 0 1px 2px rgba(130, 30, 60, 0.45);
+}
+
+.login-bonus-ribbon::before,
+.login-bonus-ribbon::after {
+  content: "";
+  position: absolute;
+  top: 6px;
+  width: 16px;
+  height: 26px;
+  background: #e0577b;
+  border: 2px solid #9d3b56;
+  z-index: -1;
+}
+
+.login-bonus-ribbon::before {
+  left: -11px;
+  border-radius: 6px 0 0 6px;
+  transform: skewY(12deg);
+}
+
+.login-bonus-ribbon::after {
+  right: -11px;
+  border-radius: 0 6px 6px 0;
+  transform: skewY(-12deg);
+}
+
+/* スタンプカード共通 */
+.bonus-day-card {
+  position: relative;
+  border-radius: 16px;
+  border: 2.5px solid #c9a87c;
+  background: #fff9ea;
+  padding: 8px 4px 7px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* DAY1〜DAY7 上部ラベル */
+.bonus-day-badge {
+  background: #7d5c43;
+  color: #fffef6;
+  font-size: 10px;
+  font-weight: 900;
+  padding: 1px 8px;
+  border-radius: 999px;
+  letter-spacing: 0.5px;
+}
+
+/* コインアイコン */
+.bonus-coin-circle {
+  position: relative;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #fff29c 0%, #ffd23f 55%, #f59e0b 100%);
+  border: 2.5px solid #b45309;
+  box-shadow: inset 0 -2px 0 rgba(180, 83, 9, 0.35), 0 2px 4px rgba(0, 0, 0, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #92400e;
+  font-weight: 900;
+  font-size: 18px;
+}
+
+/* 未来の日（未受取） */
+.bonus-day-card.is-future {
+  background: linear-gradient(180deg, #eef9ff 0%, #d8f0ff 100%);
+  border-color: #7cc0e8;
+  box-shadow: 0 3px 0 #7cc0e8;
+}
+
+.bonus-day-card.is-future .bonus-day-badge {
+  background: #3b8cc4;
+}
+
+/* 受取済みの日 */
+.bonus-day-card.is-claimed {
+  background: #efe6d5;
+  border-color: #b59d7e;
+  opacity: 0.85;
+}
+
+.bonus-day-card.is-claimed .bonus-coin-circle {
+  filter: grayscale(0.35) brightness(0.92);
+}
+
+.bonus-check-mark {
+  position: absolute;
+  inset: 0;
+  background: rgba(68, 176, 89, 0.85);
+  color: #ffffff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  font-weight: 900;
+  animation: stamp-bounce 0.3s cubic-bezier(0.2, 1.5, 0.4, 1);
+}
+
+@keyframes stamp-bounce {
+  0% { transform: scale(1.8); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* 本日のログインボーナス（ハイライト） */
+.bonus-day-card.is-today {
+  background: linear-gradient(125deg, #a7f3d0 0%, #a7f3d0 48%, #fbcfe8 52%, #fbcfe8 100%);
+  border: 3px solid #f59e0b;
+  box-shadow: 0 4px 0 #d97706, 0 0 14px rgba(251, 191, 36, 0.65);
+  transform: translateY(-2px) scale(1.03);
+}
+
+.bonus-day-card.is-today .bonus-day-badge {
+  background: linear-gradient(90deg, #f59e0b, #ec4899);
+}
+
+.bonus-day-card.is-today .bonus-coin-circle {
+  animation: coin-float 1.6s ease-in-out infinite;
+}
+
+@keyframes coin-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+/* TODAY吹き出し */
+.bonus-today-tag {
+  position: absolute;
+  top: -10px;
+  right: -6px;
+  background: #ff5d8f;
+  color: #ffffff;
+  font-size: 9px;
+  font-weight: 900;
+  padding: 1px 6px;
+  border-radius: 999px;
+  border: 1.5px solid #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* もらうボタン */
+.login-bonus-btn {
+  background: linear-gradient(180deg, #ff9ebb 0%, #ff6b98 100%);
+  color: #ffffff;
+  border: 3px solid #9d3b56;
+  box-shadow: 0 5px 0 #9d3b56;
+  text-shadow: 0 1px 2px rgba(130, 30, 60, 0.4);
+  transition: all 0.12s ease;
+  cursor: pointer;
+}
+
+.login-bonus-btn:hover:not(:disabled) {
+  filter: brightness(1.05);
+  transform: translateY(-1px);
+}
+
+.login-bonus-btn:active:not(:disabled) {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 #9d3b56;
+}
+
+.login-bonus-btn:disabled {
+  background: linear-gradient(180deg, #86efac 0%, #4ade80 100%);
+  border-color: #2b6a37;
+  box-shadow: 0 4px 0 #2b6a37;
+  color: #14532d;
+  text-shadow: none;
+  cursor: default;
+}
+
+/* =====================================
+   スマホ用：上部ナビゲーション調整
+   ===================================== */
+
+@media screen and (max-width: 767px) {
+
+    /* メニュー全体 */
+    nav:has(#tab-home) {
+        display: grid !important;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 8px;
+
+        overflow: visible !important;
+        padding-bottom: 0 !important;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    /* メニューボタン */
+    nav:has(#tab-home) button {
+        width: 100%;
+        min-width: 0;
+        flex: none !important;
+
+        padding: 10px 4px !important;
+        gap: 5px !important;
+
+        font-size: 12px !important;
+        white-space: normal !important;
+        line-height: 1.3;
+        text-align: center;
+    }
+
+    /* アイコン */
+    nav:has(#tab-home) button i {
+        width: auto !important;
+        font-size: 15px;
+    }
+}
+
+/* さらに小さいスマホ */
+@media screen and (max-width: 380px) {
+
+    nav:has(#tab-home) {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+}
+/* ===== パンジー3つの表示調整 ===== */
+
+.garden-flower-full .garden-flower-sprite.flower-pansy {
+    width: 75px;
+    height: 85px;
+    bottom: 28px;
+    transform: none;
+}
+
+/* 左 */
+.garden-flower-full .garden-flower-0.flower-pansy {
+    left: 0px;
+    right: auto;
+}
+
+/* 中央 */
+.garden-flower-full .garden-flower-extra.flower-pansy {
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+}
+
+/* 右 */
+.garden-flower-full .garden-flower-1.flower-pansy {
+    right: 0px;
+    left: auto;
+}
+
+.garden-flower-display .garden-flower-sprite:not(.flower-pansy) {
+    width: 90px;
+    height: 90px;
+}
+
+/* ===== パンジー3つの横幅調整 ===== */
+
+/* パンジーの大きさ */
+.garden-flower-full .garden-flower-sprite.flower-pansy {
+    width: 80px;
+    height: 90px;
+    bottom: 28px;
+}
+
+/* 左のパンジー */
+.garden-flower-full .garden-flower-0.flower-pansy {
+    left: 12px;
+    right: auto;
+}
+
+/* 中央のパンジー */
+.garden-flower-full .garden-flower-extra.flower-pansy {
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+}
+
+/* 右のパンジー */
+.garden-flower-full .garden-flower-1.flower-pansy {
+    right: 12px;
+    left: auto;
+}
