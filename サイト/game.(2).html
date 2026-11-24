@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ゲームモード | 学習管理＆お庭育成アプリ</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Google Fonts: Zen Maru Gothic for Game UI feel -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700;900&display=swap">
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: {
+          sans: ['"Zen Maru Gothic"', 'sans-serif'],
+        },
+        colors: {
+          gameBg: '#eef8f2',
+          gamePanel: '#fffef5',
+          gameBorder: '#8dbd96',
+          gameBrown: '#7d5c43',
+          gameAccent: '#f5a623',
+          gameGreen: '#62c478',
+          gameRed: '#f26d6d',
+          gameBlue: '#5bb8f0'
+        },
+        boxShadow: {
+          'game': '0 4px 0 rgba(100, 80, 60, 0.25)',
+          'game-btn': '0 4px 0 #684a32',
+          'game-btn-active': '0 1px 0 #684a32',
+          'game-green': '0 4px 0 #3e8851',
+        }
+      }
+    }
+  };
+</script>
+<script>
+window.MathJax = {
+    tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['\\[', '\\]']]
+    }
+};
+</script>
+<script async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+ <link rel="stylesheet" href="game.css">
+
+  <!-- PWA対応用タグ -->
+  <link rel="manifest" href="./manifest.json">
+  <meta name="theme-color" content="#4f46e5">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="学習計画">
+  <link rel="apple-touch-icon" href="./icons/icon-192.png">
+</head>
+<body class="min-h-screen text-slate-800 p-2 sm:p-4">
+
+  <div class="max-w-6xl mx-auto space-y-3">
+    
+    <!-- 1. TOP STATUS BAR (ステータスバー) -->
+    <header class="game-box p-3 flex flex-wrap items-center justify-between gap-3 bg-amber-50/90">
+      <!-- User & Level -->
+      <div class="flex items-center gap-3">
+        <div class="relative">
+          
+<div class="w-12 h-12 rounded-full bg-emerald-200 border-2 border-amber-800 flex items-center justify-center overflow-hidden shadow">
+  <img id="user-animal-icon"
+       src="images/animals/rabbit.png"
+       alt="最初に選んだ動物"
+       class="w-full h-full object-contain">
+</div>
+
+          <span class="absolute -bottom-1 -right-1 bg-amber-500 text-white text-xs font-black px-1.5 py-0.5 rounded-full border border-amber-900">
+            Lv.<span id="user-level">12</span>
+          </span>
+        </div>
+        <div>
+          <div class="font-bold text-amber-950 text-sm sm:text-base flex items-center gap-1">
+            <span id="user-name">ユーザー名</span>さん
+          </div>
+          <!-- EXP Bar -->
+          <div class="w-32 sm:w-44 bg-amber-200/80 rounded-full h-4 border border-amber-800 p-0.5 relative overflow-hidden">
+            <div id="exp-bar-inner" class="bg-gradient-to-r from-emerald-400 to-green-500 h-full rounded-full transition-all duration-300" style="width: 64%;"></div>
+            <span class="absolute inset-0 text-[10px] font-black text-amber-950 flex items-center justify-center" id="exp-text">
+              320 / 500
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Currencies -->
+      <div class="flex items-center gap-2 sm:gap-4 text-sm font-bold">
+        <!-- Apple Currency -->
+        <div class="flex items-center gap-1.5 bg-amber-100/80 px-3 py-1.5 rounded-full border-2 border-amber-800 shadow-sm">
+          <span class="text-xl leading-none">🍎</span>
+          <span id="apple-count" class="text-amber-900">12</span>
+        </div>
+        <!-- Coin Currency -->
+        <div class="flex items-center gap-1.5 bg-amber-100/80 px-3 py-1.5 rounded-full border-2 border-amber-800 shadow-sm">
+          <span class="text-xl leading-none">
+			<i class="fa-solid fa-coins"></i></span>
+          <span id="coin-count" class="text-amber-900">340</span>
+        </div>
+        <!-- Settings -->
+        <button onclick="openSettingsModal()" class="w-9 h-9 rounded-full bg-amber-200 hover:bg-amber-300 border-2 border-amber-800 flex items-center justify-center text-amber-900 shadow transition active:translate-y-0.5">
+          <i class="fa-solid fa-gear"></i>
+        </button>
+      </div>
+      
+    </header>
+
+    <!-- MAIN CONTAINER (SIDEBAR + CONTENT) -->
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-3">
+      
+      <!-- 2. SIDE NAVIGATION (サイドナビゲーション) -->
+      <nav class="md:col-span-3 flex md:flex-col gap-2 overflow-x-auto pb-1 md:pb-0">
+        <button onclick="switchTab('home')" id="tab-home" class="btn-wood active flex-1 md:flex-initial py-2.5 px-4 rounded-xl flex items-center justify-center md:justify-start gap-2 whitespace-nowrap text-sm sm:text-base">
+          <i class="fa-solid fa-house w-5 text-center"></i> ホーム
+        </button>
+        <button onclick="switchTab('garden')" id="tab-garden" class="btn-wood flex-1 md:flex-initial py-2.5 px-4 rounded-xl flex items-center justify-center md:justify-start gap-2 whitespace-nowrap text-sm sm:text-base">
+          <i class="fa-solid fa-tree w-5 text-center"></i> お庭
+        </button>
+		<button onclick="switchTab('planner')" id="tab-planner" class="btn-wood flex-1 md:flex-initial py-2.5 px-4 rounded-xl flex items-center justify-center md:justify-start gap-2 whitespace-nowrap text-sm sm:text-base">
+		  <i class="fa-solid fa-book-open w-5 text-center"></i> お勉強
+		</button>
+        <button onclick="switchTab('shop')" id="tab-shop" class="btn-wood flex-1 md:flex-initial py-2.5 px-4 rounded-xl flex items-center justify-center md:justify-start gap-2 whitespace-nowrap text-sm sm:text-base">
+          <i class="fa-solid fa-store w-5 text-center"></i> ショップ
+        </button>
+		<button onclick="switchTab('inventory')" id="tab-inventory"class="btn-wood flex-1 md:flex-initial py-2.5 px-4 rounded-xl flex items-center justify-center md:justify-start gap-2 whitespace-nowrap text-sm sm:text-base">
+		  <i class="fa-solid fa-box-open w-5 text-center"></i> もちもの
+		</button>
+        <button onclick="switchTab('achievements')" id="tab-achievements" class="btn-wood flex-1 md:flex-initial py-2.5 px-4 rounded-xl flex items-center justify-center md:justify-start gap-2 whitespace-nowrap text-sm sm:text-base">
+          <i class="fa-solid fa-trophy w-5 text-center"></i> コレクション
+        </button>
+        <button onclick="switchTab('quiz')" id="tab-quiz" style="display: none;" class="btn-wood flex-1 md:flex-initial py-2.5 px-4 rounded-xl flex items-center justify-center md:justify-start gap-2 whitespace-nowrap text-sm sm:text-base">
+  <i class="fa-solid fa-pen-to-square w-5 text-center"></i> 練習問題
+</button>
+        <button onclick="backToNormalMode()" class="btn-wood flex-1 md:flex-initial py-2.5 px-4 rounded-xl flex items-center justify-center md:justify-start gap-2 whitespace-nowrap text-sm sm:text-base">
+		  <i class="fa-solid fa-arrow-left w-5 text-center"></i>通常モードへ戻る
+		</button>
+      </nav>
+
+      <!-- 3. VIEW CONTENT AREA (メインコンテンツエリア) -->
+      <main class="md:col-span-9">
+        
+        <!-- ================= PAGE 1: ホーム画面 (HOME) ================= -->
+        <div id="view-home" class="space-y-3">
+          
+          <!-- ミニお庭プレビュー & mascot -->
+          <div class="game-box p-4 bg-gradient-to-b from-green-100 to-emerald-50 relative overflow-hidden">
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+              <div class="space-y-1 text-center sm:text-left z-10">
+                <span class="inline-block px-3 py-1 bg-amber-200 text-amber-900 border border-amber-800 rounded-full text-xs font-bold mb-1">
+                  🌱 今日の育成ステータス
+                </span>
+                <h2 class="text-xl sm:text-2xl font-black text-amber-950">自分だけのお庭がすくすく成長中！</h2>
+                <p class="text-xs sm:text-sm text-amber-800">勉強計画を達成してコインを獲得し、木や動物を増やそう！</p>
+                <div class="pt-2 flex gap-2 justify-center sm:justify-start">
+                  <button onclick="switchTab('garden')" class="px-4 py-1.5 bg-emerald-500 hover:bg-emerald-600 text-white font-bold rounded-lg border-2 border-emerald-800 shadow text-xs">
+                    お庭を見に行く 🐾
+                  </button>
+                  <button onclick="switchTab('quiz')" class="px-4 py-1.5 bg-sky-500 hover:bg-sky-600 text-white font-bold rounded-lg border-2 border-sky-800 shadow text-xs">
+                    問題を解いて育てる ✏️
+                  </button>
+                </div>
+              </div>
+              
+              <!-- Mascot Display -->
+              <div class="relative w-32 h-32 flex-shrink-0 bg-emerald-200/60 rounded-2xl border-2 border-emerald-700 flex items-center justify-center shadow-inner">
+               
+	<img id="home-animal-icon"
+     src="images/animals/rabbit.png"
+     alt="お庭の住人"
+     class="w-24 h-24 object-contain animate-bounce">
+
+                <div class="absolute -bottom-2 bg-amber-100 border border-amber-800 px-2 py-0.5 rounded-full text-[10px] font-bold text-amber-900">
+                  お庭の住人
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <!-- 今日のミッション -->
+            <div class="game-box p-4 flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between border-b-2 border-amber-200 pb-2 mb-3">
+                  <h3 class="font-black text-amber-900 flex items-center gap-2">
+                    <i class="fa-solid fa-scroll text-amber-600"></i> 今日のミッション
+                  </h3>
+                  <span class="text-xs text-amber-700 bg-amber-100 px-2 py-0.5 rounded-full font-bold">日替わり</span>
+                </div>
+                <ul class="space-y-2.5 text-xs sm:text-sm" id="daily-missions-list">
+                  <!-- Dynamic render -->
+                </ul>
+              </div>
+              <button onclick="completeAllMissions()" class="mt-4 w-full py-1.5 bg-amber-400 hover:bg-amber-500 text-amber-950 font-bold rounded-lg border-2 border-amber-800 text-xs shadow-sm">
+                一括受け取り 🎁
+              </button>
+            </div>
+
+            <!-- お知らせ Widget -->
+            <div class="game-box p-4 bg-amber-50/50">
+              <div class="flex items-center justify-between border-b-2 border-amber-200 pb-2 mb-3">
+                <h3 class="font-black text-amber-900 flex items-center gap-2">
+                  <i class="fa-solid fa-bullhorn text-amber-600"></i> お知らせ
+                </h3>
+                <span class="text-[10px] text-amber-600">NEW</span>
+              </div>
+            <div id="game-notifications" class="space-y-3 text-xs text-amber-900"></div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- ================= PAGE 2: お庭画面 (GARDEN) ================= -->
+        <div id="view-garden" class="hidden space-y-3">
+          <div class="game-box p-3 bg-amber-50 flex flex-wrap items-center justify-between gap-2">
+            <div>
+              <h2 class="font-black text-amber-950 text-base sm:text-lg flex items-center gap-2">
+                🏡 じぶんのお庭
+              </h2>
+              <p class="text-xs text-amber-800">ショップで買った植物や動物を配置して楽しもう！</p>
+            </div>
+            <!-- Garden Item Count Badges -->
+            <div class="flex flex-wrap gap-1.5 text-xs font-bold">
+              <span class="bg-emerald-100 text-emerald-900 px-2.5 py-1 rounded-full border border-emerald-400" id="stat-tree-count">木 (3本)</span>
+              <span class="bg-rose-100 text-rose-900 px-2.5 py-1 rounded-full border border-rose-400" id="stat-flower-count">花壇 (1箇所)</span>
+              <span class="bg-amber-100 text-amber-900 px-2.5 py-1 rounded-full border border-amber-400" id="stat-decor-count">飾り (1箇所)</span>
+              <span class="bg-sky-100 text-sky-900 px-2.5 py-1 rounded-full border border-sky-400" id="stat-animal-count">動物 (1匹)</span>
+            </div>
+          </div>
+          <!-- お庭の模様替えボタン -->
+		<div class="flex justify-end items-center gap-3">
+
+		<span id="garden-edit-status"
+			class="hidden text-amber-800 font-bold">
+			🌷 模様替え中...
+		</span>
+
+		<button id="garden-edit-btn"
+          type="button"
+          onclick="toggleGardenEdit()"
+          class="bg-green-500 hover:bg-green-600 text-white font-bold px-5 py-2 rounded-xl shadow">
+			<i class="fa-solid fa-paintbrush"></i> 模様替え
+		</button>
+
+		</div>
+
+          <!-- Garden Grid Canvas Container -->
+          <div class="garden-grid p-4 sm:p-6  relative flex flex-wrap items-center justify-center gap-4 sm:gap-6 shadow-inner" id="garden-canvas">
+            <!-- Dynamic garden items will render here -->
+          </div>
+          <!-- お庭のアイテム選択パネル -->
+<div id="garden-item-panel" class="hidden">
+    <div class="garden-panel-header">
+        <h3 id="garden-panel-title">木①を設定</h3>
+        <button type="button" onclick="closeGardenPanel()"
+                aria-label="閉じる">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+    </div>
+
+    <p class="garden-panel-description">
+        配置したいアイテムを選んでね！
+    </p>
+
+    <div id="garden-panel-items"></div>
+</div>
+        </div>
+
+        <!-- ================= PAGE 3: 学習計画画面 (PLANNER) ================= -->
+        <div id="view-planner" class="hidden space-y-3">
+			<!-- お勉強メニュー -->
+<div class="game-box p-4 bg-amber-50">
+
+  <h3 class="font-black text-amber-950 mb-3">
+    📚 今日も楽しくお勉強！
+  </h3>
+
+  <div class="grid grid-cols-2 gap-3">
+
+    <button onclick="document.getElementById('today-schedule-list').scrollIntoView({behavior:'smooth', block:'center'})"
+      class="bg-emerald-100 border-2 border-emerald-500 rounded-xl p-3 font-bold text-emerald-900">
+      <i class="fa-solid fa-list-check"></i>
+      今日のタスク
+    </button>
+
+    <button onclick="switchTab('quiz')"
+      class="bg-sky-100 border-2 border-sky-500 rounded-xl p-3 font-bold text-sky-900">
+      <i class="fa-solid fa-pencil"></i>
+      練習問題
+    </button>
+
+  </div>
+
+</div>
+          
+          <!-- Generator Control Header -->
+          <div class="game-box p-4 bg-amber-50">
+            <div class="flex flex-wrap items-center justify-between gap-2 border-b-2 border-amber-200 pb-2 mb-3">
+              <h2 class="font-black text-amber-950 text-base sm:text-lg flex items-center gap-2">
+                <i class="fa-solid fa-calendar-check text-emerald-600"></i> 勉強のおへや
+              </h2>
+              <button onclick="openPlanModal()" class="px-3 py-1.5 bg-amber-500 hover:bg-amber-600 text-white font-bold rounded-lg border-2 border-amber-800 text-xs shadow-sm">
+                ⚙️ 計画を自動生成・編集
+              </button>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-4">
+              
+              <!-- Left: Interactive Calendar (カレンダー) -->
+              <div class="md:col-span-7 bg-white p-3 rounded-xl border-2 border-amber-200">
+                <div class="flex items-center justify-between mb-2">
+                  <button onclick="changeCalendarMonth(-1)" class="w-7 h-7 rounded bg-amber-100 hover:bg-amber-200 text-amber-900 font-bold border border-amber-400 text-xs">&lt;</button>
+                  <span class="font-black text-amber-950 text-sm" id="calendar-month-title">2026年10月</span>
+                  <button onclick="changeCalendarMonth(1)" class="w-7 h-7 rounded bg-amber-100 hover:bg-amber-200 text-amber-900 font-bold border border-amber-400 text-xs">&gt;</button>
+                </div>
+
+                <!-- Calendar Grid Header -->
+                <div class="grid grid-cols-7 text-center font-bold text-xs text-amber-800 mb-1">
+                  <span class="text-red-500">日</span>
+                  <span>月</span>
+                  <span>火</span>
+                  <span>水</span>
+                  <span>木</span>
+                  <span>金</span>
+                  <span class="text-blue-500">土</span>
+                </div>
+                <!-- Days Container -->
+                <div class="grid grid-cols-7 gap-1 text-center text-xs font-bold" id="calendar-days-grid">
+                  <!-- Rendered via JS -->
+                </div>
+              </div>
+
+              <!-- Right: Today's Schedule (今日の学習予定) -->
+              <div class="md:col-span-5 bg-emerald-50/60 p-3 rounded-xl border-2 border-emerald-200 flex flex-col justify-between">
+                <div>
+                  <div class="flex items-center justify-between mb-2 pb-1 border-b border-emerald-200">
+                    <h3 class="font-black text-emerald-950 text-sm">📅 今日の学習予定</h3>
+                    <span class="text-[10px] bg-emerald-200 text-emerald-900 px-2 py-0.5 rounded-full font-bold" id="planner-today-date">10/23 (金)</span>
+                  </div>
+                  <div class="space-y-2 custom-scrollbar max-h-[220px] overflow-y-auto pr-1" id="today-schedule-list">
+                    <!-- Dynamic tasks -->
+                  </div>
+                </div>
+
+                <button onclick="addNewCustomTask()" class="mt-3 w-full py-1.5 bg-emerald-500 hover:bg-emerald-600 text-white font-bold rounded-lg border-2 border-emerald-800 text-xs shadow-sm flex items-center justify-center gap-1">
+                  <i class="fa-solid fa-plus"></i> 予定を追加
+                </button>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- 学習記録追加 Forms -->
+          <div class="game-box p-4 bg-amber-50/50">
+            <h3 class="font-black text-amber-950 text-sm mb-2 flex items-center gap-1">
+              ✏️ 手動で学習記録を追加する
+            </h3>
+            <div class="grid grid-cols-1 sm:grid-cols-4 gap-2">
+              <select id="log-subject" class="p-2 border-2 border-amber-300 rounded-lg text-xs font-bold bg-white text-amber-900">
+                <option value="数学">数学</option>
+                <option value="英語">英語</option>
+                <option value="物理">物理</option>
+                <option value="国語">国語</option>
+                <option value="歴史">歴史</option>
+              </select>
+              <input type="number" id="log-minutes" placeholder="勉強時間 (分)" class="p-2 border-2 border-amber-300 rounded-lg text-xs font-bold bg-white" value="30">
+              <input type="text" id="log-memo" placeholder="メモ (任意)" class="p-2 border-2 border-amber-300 rounded-lg text-xs font-bold bg-white sm:col-span-1">
+              <button onclick="saveStudyLog()" class="py-2 bg-sky-500 hover:bg-sky-600 text-white font-bold rounded-lg border-2 border-sky-800 text-xs shadow-sm">
+                記録を保存 💾
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- ================= PAGE 4: ショップ画面 (SHOP) ================= -->
+        <div id="view-shop" class="hidden space-y-3">
+          <div class="game-box p-3 bg-amber-50 flex items-center justify-between">
+            <div>
+              <h2 class="font-black text-amber-950 text-base sm:text-lg flex items-center gap-2">
+                🛒 お庭ショップ
+              </h2>
+              <p class="text-xs text-amber-800">勉強でためたコインやリンゴで木や動物を購入しよう！</p>
+            </div>
+          </div>
+
+          <!-- Shop Items Grid -->
+          <div class="grid grid-cols-2 sm:grid-cols-3 gap-3" id="shop-items-container">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+
+
+<!-- もちもの画面 -->
+<div id="view-inventory" class="hidden space-y-3">
+
+  <div class="game-box p-3 bg-amber-50">
+    <h2 class="font-black text-amber-950 text-lg">
+   <i class="fa-solid fa-box-open"></i> もちもの
+    </h2>
+    <p class="text-xs text-amber-800">
+      お迎えした仲間や、お庭のアイテムを確認できるよ！
+    </p>
+  </div>
+
+  <!-- カテゴリー切り替え -->
+  <div id="inventory-categories"
+       class="flex flex-wrap gap-2"></div>
+
+  <!-- 所持品カード一覧 -->
+  <div id="inventory-items-container"
+       class="grid grid-cols-2 sm:grid-cols-3 gap-3"></div>
+
+</div>
+
+        <!-- ================= PAGE 5: アチーブメント/コレクション (ACHIEVEMENTS) ================= -->
+        <div id="view-achievements" class="hidden space-y-3">
+          <div class="game-box p-3 bg-amber-50 flex items-center justify-between">
+            <div>
+              <h2 class="font-black text-amber-950 text-base sm:text-lg flex items-center gap-2">
+                🏆 アチーブメント図鑑
+              </h2>
+              <p class="text-xs text-amber-800">ミッションクリアや連続学習でバッジを集めよう！</p>
+            </div>
+            <div class="bg-amber-200 px-3 py-1 rounded-full border border-amber-800 text-xs font-black text-amber-950">
+              達成率: <span id="achievement-ratio">3 / 8</span>
+            </div>
+          </div>
+
+
+<!-- コレクション画面：左右レイアウト -->
+<div class="grid grid-cols-1 lg:grid-cols-5 gap-3">
+
+  <!-- 左側：バッジ一覧 -->
+ <div class="lg:col-span-3 game-box p-3 bg-white">
+  <div class="achievement-scroll">
+    <div
+      id="achievements-container"
+      class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+    </div>
+  </div>
+</div>
+  <!-- 右側：選択したバッジの詳細 -->
+<div
+  id="achievement-detail"
+  class="lg:col-span-2 game-box p-4 bg-white h-fit">
+
+    <div class="text-center py-8">
+      <div class="text-5xl mb-4">🏅</div>
+      <h3 class="font-black text-amber-950">
+        アチーブメント詳細
+      </h3>
+      <p class="text-xs text-amber-700 mt-2">
+        左のバッジを選んでね！
+      </p>
+    </div>
+
+  </div>
+
+</div>
+
+        </div>
+
+        <!-- ================= PAGE 6: 練習問題画面 (QUIZ) ================= -->
+        <div id="view-quiz" class="hidden space-y-3">
+			<!-- 教科選択 -->
+<div class="game-box p-4 bg-amber-50">
+  <h3 class="font-black text-amber-950 mb-3">
+    📚 教科を選んでね！
+  </h3>
+
+  <div id="game-quiz-subjects"
+       class="grid grid-cols-2 sm:grid-cols-3 gap-2">
+  </div>
+</div>
+			
+<!-- お勉強のおへやに戻る -->
+<div class="flex justify-start">
+  <button
+    type="button"
+    onclick="switchTab('planner')"
+    class="px-4 py-2 bg-amber-100 hover:bg-amber-200 text-amber-900 font-bold rounded-lg border-2 border-amber-400 text-xs shadow-sm"
+  >
+    <i class="fa-solid fa-arrow-left"></i>
+    お勉強のおへやに戻る
+  </button>
+</div>
+
+          <div class="game-box p-4 bg-emerald-50/80 border-2 border-emerald-600">
+            
+            <div class="flex items-center justify-between border-b-2 border-emerald-200 pb-2 mb-3">
+              <span class="font-black text-emerald-900 text-sm" id="quiz-progress-text">問題 1 / 5</span>
+              <span class="bg-emerald-200 text-emerald-950 px-3 py-0.5 rounded-full text-xs font-bold">
+                学習ステータス: Lv.<span class="quiz-lv-text">12</span>
+              </span>
+            </div>
+
+            <!-- Quiz Card -->
+            <div id="quiz-card-content" class="space-y-4">
+              <div class="bg-white p-4 rounded-xl border-2 border-emerald-300 shadow-sm">
+                <span class="inline-block bg-sky-100 text-sky-800 text-xs font-bold px-2 py-0.5 rounded mb-2" id="quiz-subject-badge">数学</span>
+                <h3 class="font-black text-slate-800 text-base sm:text-lg" id="quiz-question-text">
+                  次の式を計算しなさい。<br>(2x + 3)²
+                </h3>
+              </div>
+
+              <!-- Options -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-2" id="quiz-options-container">
+                <!-- Dynamic options -->
+              </div>
+
+              <!-- Result Message -->
+              <div id="quiz-feedback" class="hidden p-3 rounded-xl font-bold text-center text-sm"></div>
+
+              <div class="flex justify-end pt-2">
+                <button id="quiz-next-btn" onclick="nextQuizQuestion()" class="hidden px-6 py-2 bg-emerald-500 hover:bg-emerald-600 text-white font-black rounded-xl border-2 border-emerald-800 shadow text-xs sm:text-sm">
+                  次の問題へ ➔
+                </button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- MODAL: 自動計画生成設定 (PLANNER MODAL) -->
+  <div id="plan-modal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center hidden p-3">
+    <div class="game-box p-5 max-w-md w-full space-y-4 bg-amber-50">
+      <div class="flex items-center justify-between border-b-2 border-amber-200 pb-2">
+        <h3 class="font-black text-amber-950 text-base">⚙️ 学習計画の自動生成</h3>
+        <button onclick="closePlanModal()" class="text-amber-800 font-bold hover:text-amber-950">✕</button>
+      </div>
+
+      <div class="space-y-3 text-xs font-bold text-amber-900">
+        <div>
+          <label class="block mb-1">目標試験日</label>
+          <input type="date" id="plan-target-date" value="2026-11-30" class="w-full p-2 border-2 border-amber-300 rounded-lg bg-white">
+        </div>
+        <div>
+          <label class="block mb-1">重点教科 (カンマ区切り)</label>
+          <input type="text" id="plan-subjects" value="数学, 英語, 物理, 国語" class="w-full p-2 border-2 border-amber-300 rounded-lg bg-white">
+        </div>
+        <div>
+          <label class="block mb-1">1日の目標勉強時間 (分)</label>
+          <input type="number" id="plan-daily-mins" value="120" class="w-full p-2 border-2 border-amber-300 rounded-lg bg-white">
+        </div>
+      </div>
+
+      <div class="flex gap-2 pt-2">
+        <button onclick="generatePlanSchedule()" class="flex-1 py-2 bg-emerald-500 hover:bg-emerald-600 text-white font-black rounded-xl border-2 border-emerald-800 text-xs shadow">
+          計画を再生成する 🚀
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: 設定 (SETTINGS MODAL) -->
+  <div id="settings-modal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center hidden p-3">
+    <div class="game-box p-5 max-w-sm w-full space-y-4 bg-amber-50">
+      <div class="flex items-center justify-between border-b-2 border-amber-200 pb-2">
+        <h3 class="font-black text-amber-950 text-base">⚙️ 設定</h3>
+        <button onclick="closeSettingsModal()" class="text-amber-800 font-bold hover:text-amber-950">✕</button>
+      </div>
+
+      <div class="space-y-3 text-xs font-bold text-amber-900">
+        <div>
+          <label class="block mb-1">ユーザー名</label>
+          <input type="text" id="setting-username" value="ユーザー名" class="w-full p-2 border-2 border-amber-300 rounded-lg bg-white">
+        </div>
+        <button type="button" onclick="closeSettingsModal(); openLoginBonusModal(true);" class="w-full py-2 bg-sky-400 hover:bg-sky-500 text-white font-bold rounded-lg border-2 border-sky-800 text-xs">
+          🎁 ログインボーナスを確認する
+        </button>
+        <button onclick="resetData()" class="w-full py-2 bg-rose-500 hover:bg-rose-600 text-white font-bold rounded-lg border-2 border-rose-900 text-xs">
+          データを初期化 ⚠️
+        </button>
+      </div>
+
+      <div class="pt-2">
+        <button onclick="saveSettings()" class="w-full py-2 bg-amber-500 hover:bg-amber-600 text-white font-black rounded-xl border-2 border-amber-800 text-xs shadow">
+          保存する
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: ログインボーナス (LOGIN BONUS MODAL) -->
+  <div id="login-bonus-modal"
+       class="fixed inset-0 bg-black/55 backdrop-blur-sm z-[90] hidden p-3 flex items-center justify-center">
+    <div class="login-bonus-card game-box w-full max-w-md p-5 pt-7 relative text-center space-y-4">
+      
+      <!-- 右上の閉じるボタン -->
+      <button type="button"
+              onclick="closeLoginBonusModal()"
+              aria-label="閉じる"
+              class="absolute top-3 right-3 w-8 h-8 rounded-full bg-amber-100 hover:bg-amber-200 border-2 border-amber-800 text-amber-900 font-black text-sm flex items-center justify-center shadow-sm">
+        ✕
+      </button>
+
+      <!-- リボン見出し -->
+      <div class="login-bonus-ribbon-wrap">
+        <div class="login-bonus-ribbon">
+          <span>🎀 毎日コインをゲット！ 🎀</span>
+        </div>
+      </div>
+
+      <!-- サブテキスト -->
+      <div class="space-y-0.5 pt-1">
+        <p class="text-sm font-black text-amber-950">
+          毎日ログインしてコインをもらおう♪
+        </p>
+        <p class="text-xs font-bold text-amber-700">
+          連続ログインでスタンプがたまるよ✨
+        </p>
+      </div>
+
+      <!-- 7日間のスタンプカード（JSで上段4枚・下段3枚を描画） -->
+      <div id="login-bonus-grid" class="space-y-2.5 py-1">
+        <!-- Rendered by JS -->
+      </div>
+
+      <!-- 受取ボタン -->
+      <div class="pt-1">
+        <button type="button"
+                id="login-bonus-claim-btn"
+                onclick="handleClaimLoginBonus()"
+                class="login-bonus-btn w-full py-3 rounded-full font-black text-base tracking-wide">
+          🎁 30コインをもらう！
+        </button>
+      </div>
+
+    </div>
+  </div>
+  
+<!-- 初回設定モーダル -->
+<div id="first-setup-modal"
+     class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[100] hidden p-3 flex items-center justify-center">
+
+    <div class="game-box bg-amber-50 p-5 w-full max-w-md space-y-4">
+
+        <h2 class="text-xl font-black text-amber-950 text-center">
+            はじめてのお庭づくり
+        </h2>
+
+        <p class="text-sm text-amber-800 text-center">
+            最初の住人と木を選んでね！
+        </p>
+
+        <div>
+            <h3 class="font-bold text-amber-900 mb-2">
+                最初の住人
+            </h3>
+
+            <div class="grid grid-cols-3 gap-2">
+                <label class="bg-white border-2 border-amber-300 rounded-xl p-3 text-center cursor-pointer">
+                    <input type="radio" name="starter-animal" value="dog">
+                    <div class="text-3xl">🐶</div>
+                    <div class="font-bold text-sm">犬</div>
+                </label>
+
+                <label class="bg-white border-2 border-amber-300 rounded-xl p-3 text-center cursor-pointer">
+                    <input type="radio" name="starter-animal" value="cat">
+                    <div class="text-3xl">🐱</div>
+                    <div class="font-bold text-sm">猫</div>
+                </label>
+
+                <label class="bg-white border-2 border-amber-300 rounded-xl p-3 text-center cursor-pointer">
+                    <input type="radio" name="starter-animal" value="rabbit">
+                    <div class="text-3xl">🐰</div>
+                    <div class="font-bold text-sm">ウサギ</div>
+                </label>
+            </div>
+        </div>
+
+        <div>
+            <h3 class="font-bold text-amber-900 mb-2">
+                最初の木
+            </h3>
+
+            <div class="grid grid-cols-2 gap-2">
+                <label class="bg-white border-2 border-amber-300 rounded-xl p-3 text-center cursor-pointer">
+                    <input type="radio" name="starter-tree" value="apple">
+                    <div class="text-3xl">🍎</div>
+                    <div class="font-bold text-sm">リンゴの木</div>
+                </label>
+
+                <label class="bg-white border-2 border-amber-300 rounded-xl p-3 text-center cursor-pointer">
+                    <input type="radio" name="starter-tree" value="coconut">
+                    <div class="text-3xl">🥥</div>
+                    <div class="font-bold text-sm">ココナッツの木</div>
+                </label>
+            </div>
+        </div>
+
+        <button type="button"
+                onclick="completeFirstSetup()"
+                class="w-full py-3 bg-amber-400 hover:bg-amber-500 border-2 border-amber-800 rounded-xl font-black text-amber-950">
+            お庭づくりをはじめる！ 🌱
+        </button>
+
+    </div>
+</div>
+<script src="../練習問題専用/questions.js"></script>
+<script src="game.js"></script>
+</body>
+</html>
